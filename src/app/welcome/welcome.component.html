@@ -1,0 +1,18 @@
+<form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center">
+  <div class="login">
+    <md-input-container class="username">
+      <md-icon mdPrefix>home</md-icon>
+      <input type="text" [(ngModel)]="username" mdInput name="username">
+    </md-input-container>
+
+    <md-input-container class="password">
+      <md-icon mdPrefix>home</md-icon>
+      <input type="password" [(ngModel)]="password" mdInput name="password">
+    </md-input-container>
+
+    <div class="clearfix form-action">
+      <md-checkbox class="pull-left" [(ngModel)]="isAdmin" [checked]="isAdmin" name="isAdmin">管理员</md-checkbox>
+      <button type="submit" class="pull-right" md-raised-button>登录</button>
+    </div>
+  </div>
+</form>
