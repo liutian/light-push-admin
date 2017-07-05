@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>命名空间</th>
+      <th>名称</th>
+      <th>auth_passwd</th>
+      <th>更新日期</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of nsList | async">
+      <td>{{item.key}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.passwd}}</td>
+      <td>{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>
+        <button md-button color="primary">
+          apns证书
+        </button>
+        <button md-button color="primary" (click)="nsEnter(item)">
+          进入
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

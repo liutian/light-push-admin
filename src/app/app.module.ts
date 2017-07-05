@@ -10,11 +10,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ApiService } from './util/api.service';
+import { HomeComponent } from './home/home.component';
+import { DialogComponent } from './util/dialog.component';
+import { ChartComponent } from './util/chart.component';
+import { OverviewChartComponent } from './home/overview/overview-chart/overview-chart.component';
+import { OverviewComponent } from './home/overview/overview.component';
+import { NsListComponent } from './home/ns-list/ns-list.component';
+import { DialogInputComponent } from './util/dialog-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    DialogComponent,
+    HomeComponent,
+    ChartComponent,
+    OverviewChartComponent,
+    OverviewComponent,
+    NsListComponent,
+    DialogInputComponent
+  ],
+  entryComponents: [
+    DialogComponent,
+    DialogInputComponent
   ],
   imports: [
     BrowserAnimationsModule,

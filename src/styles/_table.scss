@@ -1,0 +1,32 @@
+.table{
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+
+    th:first-of-type,td:first-of-type{
+        padding-left: 10px;
+    }
+    thead tr{
+        background-color: #eee;
+        border-bottom: solid 2px #ddd;
+        border-top: solid 0 transparent;
+    }
+
+    tr{
+        border-top: solid 1px #ddd;
+    }
+
+    td,th{
+        padding: 10px 0;
+    }
+
+    th{
+        text-align: left;
+    }
+}
+
+.table-hover tr:hover{
+    background-color: #eee;
+
+}

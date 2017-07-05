@@ -32,16 +32,16 @@ export function acceptHot(_appModule, moduleRef) {
     delete store.disposeOldHosts;
   });
 
-  // module.hot.apply(function () {
-  //     console.log('hrm-apply');
+  // _appModule.hot.apply(function () {
+  //   console.log('hrm-apply');
   // });
 
-  // module.hot.check(function () {
-  //     console.log('hrm-check');
+  // _appModule.hot.check(function () {
+  //   console.log('hrm-check');
   // });
 
-  // module.hot.decline(function () {
-  //     console.log('hrm-decline');
+  // _appModule.hot.decline(function () {
+  //   console.log('hrm-decline');
   // });
 }
 
@@ -57,6 +57,7 @@ function createNewHosts(cmps: any) {
     newNode.style.display = 'none';
     const parentNode = componentNode.parentNode;
     parentNode.insertBefore(newNode, componentNode);
+    componentNode.remove();
     return { currentDisplay, newNode };
   });
   return () => {

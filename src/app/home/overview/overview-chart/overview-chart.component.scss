@@ -1,0 +1,17 @@
+@import '../../../../styles/_var.scss';
+
+:host /deep/ .chart > div{
+  position: absolute !important;
+}
+
+.mat-tab-link{
+  min-width: 50px;
+}
+
+.action-btn-group{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  bottom: $padding;
+  text-align: center;
+}

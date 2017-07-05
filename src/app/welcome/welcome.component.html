@@ -1,12 +1,12 @@
-<form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center">
+<form fxLayout="column" (submit)="login()" autocomplete="off" fxLayoutAlign="center center">
   <div class="login">
     <md-input-container class="username">
-      <md-icon mdPrefix>home</md-icon>
+      <md-icon mdPrefix>person</md-icon>
       <input type="text" [(ngModel)]="username" mdInput name="username">
     </md-input-container>
 
     <md-input-container class="password">
-      <md-icon mdPrefix>home</md-icon>
+      <md-icon mdPrefix>https</md-icon>
       <input type="password" [(ngModel)]="password" mdInput name="password">
     </md-input-container>
 

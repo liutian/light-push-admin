@@ -1,0 +1,24 @@
+@import '../../../styles/var';
+
+.dashboard,.emitter,.msg-list{
+  padding: $padding;
+}
+
+.dashboard{
+  width: $dashboard-width;
+  height: $dashboard-height;
+}
+
+.emitter{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - #{$dashboard-width} - #{$padding});
+  height: 700px;
+  padding: $padding;
+}
+
+.msg-list{
+  margin-top: $padding;
+  width: $dashboard-width;
+}
