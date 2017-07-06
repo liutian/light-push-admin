@@ -1,18 +1,20 @@
-<form fxLayout="column" (submit)="login()" autocomplete="off" fxLayoutAlign="center center">
+<form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center" #loginForm="ngForm">
   <div class="login">
     <md-input-container class="username">
       <md-icon mdPrefix>person</md-icon>
-      <input type="text" [(ngModel)]="username" mdInput name="username">
+      <input type="text" [(ngModel)]="username" mdInput name="username" required>
+      <md-error>必填</md-error>
     </md-input-container>
 
     <md-input-container class="password">
       <md-icon mdPrefix>https</md-icon>
-      <input type="password" [(ngModel)]="password" mdInput name="password">
+      <input type="password" [(ngModel)]="password" mdInput name="password" required>
+      <md-error>必填</md-error>
     </md-input-container>
 
     <div class="clearfix form-action">
       <md-checkbox class="pull-left" [(ngModel)]="isAdmin" [checked]="isAdmin" name="isAdmin">管理员</md-checkbox>
-      <button type="submit" class="pull-right" md-raised-button>登录</button>
+      <button type="submit" class="pull-right" [disabled]="loginForm.form.invalid" md-raised-button>登录</button>
     </div>
   </div>
 </form>

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MaterialModule, MdNativeDateModule } from '@angular/material';
+import { MaterialModule, MdNativeDateModule, MdSnackBarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,9 @@ import { OverviewChartComponent } from './home/overview/overview-chart/overview-
 import { OverviewComponent } from './home/overview/overview.component';
 import { NsListComponent } from './home/ns-list/ns-list.component';
 import { DialogInputComponent } from './util/dialog-input.component';
+import { OverviewEmitterComponent } from './home/overview/overview-emitter/overview-emitter.component';
+import { OverviewListComponent } from './home/overview/overview-list/overview-list.component';
+import { UserService } from './util/user.service';
 
 @NgModule({
   declarations: [
@@ -28,13 +31,16 @@ import { DialogInputComponent } from './util/dialog-input.component';
     OverviewChartComponent,
     OverviewComponent,
     NsListComponent,
-    DialogInputComponent
+    DialogInputComponent,
+    OverviewEmitterComponent,
+    OverviewListComponent
   ],
   entryComponents: [
     DialogComponent,
     DialogInputComponent
   ],
   imports: [
+    MdSnackBarModule,
     BrowserAnimationsModule,
     HttpModule,
     FormsModule,
@@ -44,7 +50,9 @@ import { DialogInputComponent } from './util/dialog-input.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

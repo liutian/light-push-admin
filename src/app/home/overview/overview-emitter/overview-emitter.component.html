@@ -1,0 +1,44 @@
+<nav md-tab-nav-bar>
+  <a md-tab-link [active]="currTab == 'push'" (click)="currTab = 'push'">推送数据</a>
+  <a md-tab-link [active]="currTab == 'report'" (click)="currTab = 'report'">推送报告</a>
+</nav>
+
+<form (ngSubmit)="sendMessage()" autocomplete="off" *ngIf="currTab == 'push'" #sendMessageForm="ngForm">
+
+  <md-input-container>
+    <input type="text" mdInput [(ngModel)]="messageForm.room" name="room" color="warn" placeholder="输入房间名" required>
+    <md-error>必填</md-error>
+  </md-input-container>
+
+  <md-input-container>
+    <textarea mdInput rows="7" [(ngModel)]="messageForm.pushData" name="pushData" placeholder="输入推送数据" required></textarea>
+    <md-error>必填</md-error>
+    <md-hint>必须是JSON字符串</md-hint>
+  </md-input-container>
+
+  <md-input-container>
+    <input type="text" mdInput [(ngModel)]="messageForm.apnsName" name="apnsName" placeholder="输入apnsName">
+  </md-input-container>
+
+  <div style="text-align: right;">
+    <md-slide-toggle checked="messageForm.leaveMessage" color="primary" name="leaveMessage" [(ngModel)]="messageForm.leaveMessage">离线保存</md-slide-toggle>
+    <button type="submit" [disabled]="sendMessageForm.form.invalid" md-raised-button color="primary">发送</button>
+  </div>
+
+  <div class="toggle-to-report" *ngIf="sendId">
+    <a (click)="toggleToReport()">
+      查看推送报告(id:{{sendId}})
+    </a>
+  </div>
+</form>
+
+
+<form (ngSubmit)="report()" autocomplete="off" *ngIf="currTab == 'report'">
+  <md-input-container>
+    <input type="text" mdInput [(ngModel)]="reportMessageId" name="reportMessageId" color="warn" placeholder="输入消息ID查询" required>
+    <button type="submit" md-raised-button [disabled]="!reportMessageId" color="primary" mdSuffix>查看</button>
+    <md-error>必填</md-error>
+  </md-input-container>
+
+  <textarea rows="15" readonly disabled name="reportMessage" [(ngModel)]="reportMessage"></textarea>
+</form>

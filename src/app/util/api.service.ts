@@ -78,4 +78,57 @@ export class ApiService {
       return res.json();
     });
   }
+
+  push(data) {
+    if (!this.auth) {
+      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      return;
+    }
+
+    let url = environment.api + '/api/auth/push';
+    let headers = new Headers();
+    headers.set('Authorization', this.auth);
+
+    return this.http.post(url, data, {
+      headers: headers
+    }).toPromise().then(function (res) {
+      return res.json();
+    });
+  }
+
+  pushReport(id, params?) {
+    if (!this.auth) {
+      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      return;
+    }
+
+    let query = params ? '?' + params : '';
+    let url = environment.api + '/api/auth/report/push/' + id + query;
+    let headers = new Headers();
+    headers.set('Authorization', this.auth);
+
+    return this.http.get(url, {
+      headers: headers
+    }).toPromise().then(function (res) {
+      return res.json();
+    })
+  }
+
+  reportList(params?) {
+    if (!this.auth) {
+      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      return;
+    }
+
+    let query = params ? '?' + params : '';
+    let url = environment.api + '/api/auth/report/push' + query;
+    let headers = new Headers();
+    headers.set('Authorization', this.auth);
+
+    return this.http.get(url, {
+      headers: headers
+    }).toPromise().then(function (res) {
+      return res.json();
+    })
+  }
 }

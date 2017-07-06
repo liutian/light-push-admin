@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 
 html,body {
   height: 100%;
@@ -8,6 +11,10 @@ a{
   cursor: pointer;
 }
 
-* {
-  box-sizing: border-box;
+textarea{
+  resize: none;
+  width: 100%;
+  border: solid 0 transparent;
 }
+
+

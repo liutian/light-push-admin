@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { ApiService } from '../util/api.service';
 import { DialogComponent } from '../util/dialog.component';
+import { UserService } from '../util/user.service';
 
 @Component({
   selector: 'p-welcome',
@@ -18,6 +19,7 @@ export class WelcomeComponent implements OnInit {
 
   constructor(private api: ApiService,
     private dialog: MdDialog,
+    private user: UserService,
     private router: Router) { }
 
   ngOnInit() {
@@ -26,6 +28,10 @@ export class WelcomeComponent implements OnInit {
   login() {
     this.api.login(this.username, this.password, this.isAdmin).then(() => {
       let dialogRef = this.dialog.open(DialogComponent, { data: '登录成功' });
+      this.user.name = this.username;
+      this.user.key = this.username;
+      this.user.password = this.password;
+      this.user.role = this.isAdmin ? 'admin' : 'user';
       setTimeout(() => {
         dialogRef.close();
         if (this.isAdmin) {

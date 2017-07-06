@@ -5,7 +5,7 @@
 }
 
 .mat-tab-link{
-  min-width: 50px;
+  min-width: $tab-width;
 }
 
 .action-btn-group{
@@ -15,3 +15,5 @@
   bottom: $padding;
   text-align: center;
 }
+
+

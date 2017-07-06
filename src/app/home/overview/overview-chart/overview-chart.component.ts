@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { MdDialog } from '@angular/material';
 
@@ -11,8 +11,9 @@ import { DialogInputComponent } from '../../../util/dialog-input.component';
   templateUrl: './overview-chart.component.html',
   styleUrls: ['./overview-chart.component.scss']
 })
-export class OverviewChartComponent implements OnInit {
+export class OverviewChartComponent implements OnInit, OnDestroy {
   private chartOption: any;
+  private fetchTimeout: number;
   optionObservable: any;
   optionObserver: any;
   chartOptionOverview: any;
@@ -144,7 +145,7 @@ export class OverviewChartComponent implements OnInit {
     Promise.all([this.fetchOverviewOnlineData(), this.fetchRoomOnlineData()]).then(() => {
       this.optionObserver.next({ option: this.chartOption });
 
-      window.setTimeout(() => {
+      this.fetchTimeout = window.setTimeout(() => {
         this.fetchData();
       }, 5000);
     })
@@ -238,5 +239,9 @@ export class OverviewChartComponent implements OnInit {
 
   private padStart(str) {
     return (str + '').padStart(2, '0');
+  }
+
+  ngOnDestroy() {
+    this.fetchTimeout && window.clearTimeout(this.fetchTimeout);
   }
 }

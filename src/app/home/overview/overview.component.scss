@@ -14,11 +14,11 @@
   top: 0;
   right: 0;
   width: calc(100% - #{$dashboard-width} - #{$padding});
-  height: 700px;
+  height: $dashboard-height;
   padding: $padding;
+  overflow: auto;
 }
 
 .msg-list{
   margin-top: $padding;
-  width: $dashboard-width;
 }
