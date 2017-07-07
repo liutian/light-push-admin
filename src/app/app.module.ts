@@ -20,6 +20,7 @@ import { DialogInputComponent } from './util/dialog-input.component';
 import { OverviewEmitterComponent } from './home/overview/overview-emitter/overview-emitter.component';
 import { OverviewListComponent } from './home/overview/overview-list/overview-list.component';
 import { UserService } from './util/user.service';
+import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +34,13 @@ import { UserService } from './util/user.service';
     NsListComponent,
     DialogInputComponent,
     OverviewEmitterComponent,
-    OverviewListComponent
+    OverviewListComponent,
+    DialogNsComponent
   ],
   entryComponents: [
     DialogComponent,
-    DialogInputComponent
+    DialogInputComponent,
+    DialogNsComponent
   ],
   imports: [
     MdSnackBarModule,

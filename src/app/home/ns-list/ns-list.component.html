@@ -1,26 +1,29 @@
+<div class="add-ns">
+  <a md-raised-button color="primary" (click)="addNs()">新增命名空间</a>
+</div>
+
 <table class="table">
   <thead>
     <tr>
       <th>命名空间</th>
       <th>名称</th>
-      <th>auth_passwd</th>
+      <th>密码</th>
       <th>更新日期</th>
       <th>操作</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of nsList | async">
+    <tr *ngFor="let item of nsList;let i = index">
       <td>{{item.key}}</td>
       <td>{{item.name}}</td>
-      <td>{{item.passwd}}</td>
+      <td>{{item.auth_passwd}}</td>
       <td>{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>
-        <button md-button color="primary">
-          编辑
-        </button>
         <button md-button color="primary" (click)="nsEnter(item)">
           进入
         </button>
+        <button md-button (click)="updateNs(item)" color="primary">编辑</button>
+        <button md-button (click)="delNs(item,i)" color="warn" *ngIf="item.key != '/'">删除</button>
       </td>
     </tr>
   </tbody>

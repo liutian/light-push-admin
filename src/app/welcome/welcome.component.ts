@@ -17,7 +17,7 @@ export class WelcomeComponent implements OnInit {
   password: string;
   isAdmin: boolean;
 
-  constructor(private api: ApiService,
+  constructor(private apiService: ApiService,
     private dialog: MdDialog,
     private user: UserService,
     private router: Router) { }
@@ -26,12 +26,16 @@ export class WelcomeComponent implements OnInit {
   }
 
   login() {
-    this.api.login(this.username, this.password, this.isAdmin).then(() => {
-      let dialogRef = this.dialog.open(DialogComponent, { data: '登录成功' });
-      this.user.name = this.username;
-      this.user.key = this.username;
-      this.user.password = this.password;
-      this.user.role = this.isAdmin ? 'admin' : 'user';
+    this.apiService.login(this.username, this.password, this.isAdmin).then(() => {
+      let dialogRef = this.dialog.open(DialogComponent, { data: { des: '登录成功' } });
+      let userKey = (this.isAdmin ? '' : '/') + this.username;
+      this.user.save({
+        name: this.username,
+        key: userKey,
+        password: this.password,
+        role: this.isAdmin ? 'admin' : 'user'
+      });
+      this.apiService.encodeAuth(userKey, this.password);
       setTimeout(() => {
         dialogRef.close();
         if (this.isAdmin) {
@@ -41,7 +45,7 @@ export class WelcomeComponent implements OnInit {
         }
       }, 1000);
     }).catch(() => {
-      let dialogRef = this.dialog.open(DialogComponent, { data: '登录失败' });
+      let dialogRef = this.dialog.open(DialogComponent, { data: { des: '登录失败' } });
       setTimeout(() => {
         dialogRef.close();
       }, 1000);

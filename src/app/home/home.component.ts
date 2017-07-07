@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
+import { MdDialog } from '@angular/material';
 
 import { ApiService } from '../util/api.service';
 import { UserService } from '../util/user.service';
+import { DialogNsComponent } from '../util/dialog-ns/dialog-ns.component';
 
 @Component({
   selector: 'p-home',
@@ -13,17 +15,15 @@ import { UserService } from '../util/user.service';
 export class HomeComponent implements OnInit {
   constructor(private apiService: ApiService,
     private user: UserService,
+    private dialog: MdDialog,
     private router: Router) { }
 
   ngOnInit() {
   }
 
-  home() {
-    if (this.user.role == 'admin') {
-      this.router.navigate(['home/ns-list']);
-    } else {
-      alert('ss');
-    }
+  logout() {
+    this.user.save({});
+    this.router.navigate(['welcome']);
   }
 
 }

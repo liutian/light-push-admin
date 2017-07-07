@@ -1,0 +1,55 @@
+<form (ngSubmit)="saveNamespace()" #nsForm="ngForm">
+
+  <h2 md-dialog-title>{{isNew ? '新增命名空间' : '编辑命名空间'}}</h2>
+  <md-dialog-content>
+    <md-input-container>
+      <input mdInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required [readonly]="!isNew" [disabled]="!isNew">
+      <md-error>必填</md-error>
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput type="text" placeholder="名称" [(ngModel)]="namespace.name" name="ns-name" required>
+      <md-error>必填</md-error>
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput type="password" placeholder="密码" [(ngModel)]="namespace.auth_passwd" name="ns-auth_passwd" required>
+      <md-error>必填</md-error>
+    </md-input-container>
+
+    <div class="apns-list" *ngFor="let apns of namespace.apns_list">
+      <md-input-container>
+        <input mdInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required [disabled]="!apns.isNew">
+        <button type="button" md-button mdSuffix *ngIf="!apns.isNew" (click)="toggleDel(apns)" class="apns-del-btn" [class.del]="apns.del"
+          color="warn">删除</button>
+        <md-error>必填</md-error>
+      </md-input-container>
+
+      <md-radio-group [value]="apns.apns_env" (change)="apns.apns_env = $event.value">
+        <md-radio-button [value]="'production'">生产环境证书</md-radio-button>
+        <md-radio-button [value]="'dev'">测试环境证书</md-radio-button>
+      </md-radio-group>
+      <md-input-container>
+        <textarea mdInput placeholder="测试证书cert" [(ngModel)]="apns.apns_dev_cert" name="apns-apns_dev_cert"></textarea>
+      </md-input-container>
+
+      <md-input-container>
+        <textarea mdInput placeholder="测试证书key" [(ngModel)]="apns.apns_dev_key" name="apns-apns_dev_key"></textarea>
+      </md-input-container>
+
+      <md-input-container>
+        <textarea mdInput placeholder="生产证书cert" [(ngModel)]="apns.apns_production_cert" name="apns-apns_production_cert"></textarea>
+      </md-input-container>
+
+      <md-input-container>
+        <textarea mdInput placeholder="生产证书key" [(ngModel)]="apns.apns_production_key" name="apns-apns_production_key"></textarea>
+      </md-input-container>
+    </div>
+
+  </md-dialog-content>
+  <div class="clearfix action">
+    <button type="submit" class="pull-right" md-raised-button color="primary" [disabled]="nsForm.form.invalid">保存</button>
+    <button type="button" class="pull-right" (click)="addApns()" md-raised-button color="primary">新增apns证书</button>
+    <button type="button" class="pull-right" md-dialog-close md-raised-button>取消</button>
+  </div>
+</form>

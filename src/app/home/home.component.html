@@ -1,13 +1,18 @@
 <header>
   <div class="layout-center clearfix">
     <div class="pull-left">
-      微企消息推送平台
+      <a>微企消息推送平台</a>
     </div>
     <div class="pull-right">
-      <button type="button" md-button (click)="home()">
+      <button type="button" md-button [mdMenuTriggerFor]="appMenu">
         {{user.name}}
-        <md-icon>home</md-icon>
+        <md-icon>person outline</md-icon>
       </button>
+
+      <md-menu #appMenu="mdMenu">
+        <button md-menu-item routerLink="/home/ns-list" *ngIf="user.role == 'admin'">命名空间列表</button>
+        <button md-menu-item (click)="logout()">退出</button>
+      </md-menu>
     </div>
   </div>
 </header>

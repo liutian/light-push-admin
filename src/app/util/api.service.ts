@@ -14,16 +14,16 @@ export class ApiService {
   auth: string;
 
   constructor(private http: Http, private dialog: MdDialog) {
-    this.auth = window.sessionStorage.getItem(this.authKey);
+    this.auth = window.localStorage.getItem(this.authKey);
   }
 
-  encodeAuth(key, pwd) {
+  encodeAuth(key: string, pwd) {
     let auth = Base64.encode(key + ':' + pwd);
     this.setAuth(auth);
   }
 
   setAuth(auth) {
-    window.sessionStorage.setItem(this.authKey, auth);
+    window.localStorage.setItem(this.authKey, auth);
     this.auth = auth;
   }
 
@@ -46,7 +46,7 @@ export class ApiService {
 
   onlineReport(params?) {
     if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
       return;
     }
 
@@ -64,7 +64,7 @@ export class ApiService {
 
   nsQueryList() {
     if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
       return;
     }
 
@@ -81,7 +81,7 @@ export class ApiService {
 
   push(data) {
     if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
       return;
     }
 
@@ -98,7 +98,7 @@ export class ApiService {
 
   pushReport(id, params?) {
     if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
       return;
     }
 
@@ -116,7 +116,7 @@ export class ApiService {
 
   reportList(params?) {
     if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: '认证参数丢失' });
+      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
       return;
     }
 
@@ -130,5 +130,40 @@ export class ApiService {
     }).toPromise().then(function (res) {
       return res.json();
     })
+  }
+
+  saveNamespace(data) {
+    if (!this.auth) {
+      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
+      return;
+    }
+
+    let url = environment.api + '/api/admin/namespace/save';
+    let headers = new Headers();
+    headers.set('Authorization', this.auth);
+
+    return this.http.post(url, data, {
+      headers: headers
+    }).toPromise().then(function (res) {
+      return res.json();
+    })
+  }
+
+  delNamespace(key) {
+    if (!this.auth) {
+      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
+      return;
+    }
+
+    let url = environment.api + '/api/admin/namespace/del' + key;
+    let headers = new Headers();
+    headers.set('Authorization', this.auth);
+
+    return this.http.get(url, {
+      headers: headers
+    }).toPromise().then(function (res) {
+      return res.json();
+    })
+
   }
 }
