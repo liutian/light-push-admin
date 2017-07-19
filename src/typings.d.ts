@@ -1,4 +1,4 @@
-/* SystemJS module definition */
+//用于热加载模块用到的module
 declare var module: NodeModule;
 interface NodeModule {
   id: string;

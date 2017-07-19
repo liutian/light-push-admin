@@ -8,6 +8,9 @@ import { NsListComponent } from './home/ns-list/ns-list.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: WelcomeComponent
+  }, {
     path: 'welcome',
     component: WelcomeComponent
   }, {
@@ -22,11 +25,13 @@ const routes: Routes = [
         component: NsListComponent
       }
     ]
-  }, {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'welcome'
-  }, {
+  },
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   redirectTo: 'welcome'
+  // },
+  {
     path: '**',
     redirectTo: ''
   }

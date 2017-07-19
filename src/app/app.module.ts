@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MaterialModule, MdNativeDateModule, MdSnackBarModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -43,13 +43,11 @@ import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
     DialogNsComponent
   ],
   imports: [
-    MdSnackBarModule,
     BrowserAnimationsModule,
     HttpModule,
     FormsModule,
     FlexLayoutModule,
     MaterialModule,
-    MdNativeDateModule,
     BrowserModule,
     AppRoutingModule
   ],

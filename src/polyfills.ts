@@ -74,4 +74,4 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 
 
 
-import './assets/lib/lazyload/lazyload.js';
+import '../lib/lazyload/lazyload.js';

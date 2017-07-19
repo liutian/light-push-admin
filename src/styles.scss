@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~normalize.css/normalize.css';
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @import './styles/var';
+@import './styles/mixin';
 @import './styles/fonts';
 @import './styles/type';
 @import './styles/util';
 @import './styles/table';
-@import './styles/mixin';

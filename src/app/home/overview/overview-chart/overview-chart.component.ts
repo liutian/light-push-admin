@@ -65,7 +65,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   showAddRoom() {
     let dialogRef = this.dialog.open(DialogInputComponent);
     dialogRef.afterClosed().subscribe(result => {
-      if (result === -1) return;
+      if (result === -1 || result === undefined) return;
 
       if (!result || !result.trim()) {
         alert('请填写房间名');

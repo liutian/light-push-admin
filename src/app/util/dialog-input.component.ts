@@ -16,5 +16,5 @@ import { MD_DIALOG_DATA } from '@angular/material';
   `
 })
 export class DialogInputComponent {
-  constructor( @Inject(MD_DIALOG_DATA) private des: String) { }
+  constructor( @Inject(MD_DIALOG_DATA) public des: String) { }
 }

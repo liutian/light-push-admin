@@ -14,7 +14,7 @@ import { DialogNsComponent } from '../util/dialog-ns/dialog-ns.component';
 })
 export class HomeComponent implements OnInit {
   constructor(private apiService: ApiService,
-    private user: UserService,
+    public user: UserService,
     private dialog: MdDialog,
     private router: Router) { }
 
