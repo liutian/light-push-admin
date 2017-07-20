@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 
-import { ApiService } from '../../../util/api.service';
+import { ApiService } from 'app/util/api.service';
 
 @Component({
   selector: 'p-overview-emitter',

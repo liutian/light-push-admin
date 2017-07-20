@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 
-import { ApiService } from '../../util/api.service';
+import { ApiService } from 'app/util/api.service';
 
 @Component({
   selector: 'p-dialog-ns',

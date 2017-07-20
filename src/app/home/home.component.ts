@@ -3,9 +3,9 @@ import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 
-import { ApiService } from '../util/api.service';
-import { UserService } from '../util/user.service';
-import { DialogNsComponent } from '../util/dialog-ns/dialog-ns.component';
+import { ApiService } from 'app/util/api.service';
+import { UserService } from 'app/util/user.service';
+import { DialogNsComponent } from 'app/util/dialog-ns/dialog-ns.component';
 
 @Component({
   selector: 'p-home',
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   logout() {
     this.user.save({});
-    this.router.navigate(['welcome']);
+    this.router.navigateByUrl('/welcome');
   }
 
 }

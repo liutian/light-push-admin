@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
 
-import { ApiService } from '../../util/api.service';
-import { UserService } from '../../util/user.service';
-import { DialogNsComponent } from '../../util/dialog-ns/dialog-ns.component';
-import { DialogComponent } from '../../util/dialog.component';
+import { ApiService } from 'app/util/api.service';
+import { UserService } from 'app/util/user.service';
+import { DialogNsComponent } from 'app/util/dialog-ns/dialog-ns.component';
+import { DialogComponent } from 'app/util/dialog.component';
 
 
 @Component({
@@ -49,7 +49,7 @@ export class NsListComponent implements OnInit {
   updateNs(namespace) {
     let dialogRef = this.dialog.open(DialogNsComponent, {
       data: {
-        namespace: namespace,
+        namespace,
         close: function (data) {
           dialogRef.close(data);
         }

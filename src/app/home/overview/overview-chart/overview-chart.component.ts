@@ -2,9 +2,9 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { MdDialog } from '@angular/material';
 
-import { ApiService } from '../../../util/api.service';
+import { ApiService } from 'app/util/api.service';
 import { ChartOption } from './chart-option';
-import { DialogInputComponent } from '../../../util/dialog-input.component';
+import { DialogInputComponent } from 'app/util/dialog-input.component';
 
 @Component({
   selector: 'p-overview-chart',

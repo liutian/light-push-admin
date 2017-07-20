@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { ApiService } from '../util/api.service';
-import { DialogComponent } from '../util/dialog.component';
-import { UserService } from '../util/user.service';
+import { ApiService } from 'app/util/api.service';
+import { DialogComponent } from 'app/util/dialog.component';
+import { UserService } from 'app/util/user.service';
 
 @Component({
   selector: 'p-welcome',
@@ -39,9 +39,9 @@ export class WelcomeComponent implements OnInit {
       setTimeout(() => {
         dialogRef.close();
         if (this.isAdmin) {
-          this.router.navigate(['home/ns-list']);
+          this.router.navigateByUrl('/home/ns-list');
         } else {
-          this.router.navigate(['home']);
+          this.router.navigateByUrl('/home');
         }
       }, 1000);
     }).catch(() => {

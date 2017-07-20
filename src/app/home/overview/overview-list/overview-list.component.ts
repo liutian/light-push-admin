@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 
-import { ApiService } from '../../../util/api.service';
-import { DialogComponent } from '../../../util/dialog.component';
+import { ApiService } from 'app/util/api.service';
+import { DialogComponent } from 'app/util/dialog.component';
 
 @Component({
   selector: 'p-overview-list',

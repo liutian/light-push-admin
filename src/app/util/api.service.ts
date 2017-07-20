@@ -34,9 +34,7 @@ export class ApiService {
     let auth = Base64.encode((isAdmin ? '' : '/') + username + ':' + password);
     let headers = new Headers();
     headers.set('Authorization', auth);
-    return this.http.post(url, null, {
-      headers: headers
-    }).toPromise().then((res) => {
+    return this.http.post(url, null, { headers }).toPromise().then((res) => {
       this.setAuth(auth);
     }).catch(function (e) {
       if (e.status == 404) {
@@ -102,9 +100,9 @@ export class ApiService {
     headers.set('Authorization', this.auth);
 
     if (method === RequestMethod.Post) {
-      return this.http.post(url, data, { headers: headers }).map(res => res.json()).toPromise();
+      return this.http.post(url, data, { headers }).map(res => res.json()).toPromise();
     } else {
-      return this.http.get(url, { headers: headers }).map(res => res.json()).toPromise();
+      return this.http.get(url, { headers }).map(res => res.json()).toPromise();
     }
   }
 }

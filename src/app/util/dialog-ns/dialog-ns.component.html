@@ -17,11 +17,11 @@
       <md-error>必填</md-error>
     </md-input-container>
 
-    <div class="apns-list" *ngFor="let apns of namespace.apns_list">
+    <div class="apns-item" *ngFor="let apns of namespace.apns_list">
       <md-input-container>
         <input mdInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required [disabled]="!apns.isNew">
         <button type="button" md-button mdSuffix *ngIf="!apns.isNew" (click)="toggleDel(apns)" class="apns-del-btn" [class.del]="apns.del"
-          color="warn">删除</button>
+          color="warn">删除apns</button>
         <md-error>必填</md-error>
       </md-input-container>
 
