@@ -21,8 +21,8 @@
   </md-input-container>
 
   <div style="text-align: right;">
-    <md-slide-toggle checked="messageForm.leaveMessage" color="primary" name="leaveMessage" [(ngModel)]="messageForm.leaveMessage">离线保存</md-slide-toggle>
-    <button type="submit" [disabled]="sendMessageForm.form.invalid" md-raised-button color="primary">发送</button>
+    <md-slide-toggle checked="messageForm.leaveMessage" color="accent" name="leaveMessage" [(ngModel)]="messageForm.leaveMessage">离线保存</md-slide-toggle>
+    <button type="submit" [disabled]="sendMessageForm.form.invalid" md-raised-button color="accent">发送</button>
   </div>
 
   <div class="toggle-to-report" *ngIf="sendId">
@@ -36,7 +36,7 @@
 <form (ngSubmit)="report()" autocomplete="off" *ngIf="currTab == 'report'">
   <md-input-container>
     <input type="text" mdInput [(ngModel)]="reportMessageId" name="reportMessageId" color="warn" placeholder="输入消息ID查询" required>
-    <button type="submit" md-raised-button [disabled]="!reportMessageId" color="primary" mdSuffix>查看</button>
+    <button type="submit" md-raised-button [disabled]="!reportMessageId" color="accent" mdSuffix>查看</button>
     <md-error>必填</md-error>
   </md-input-container>
 

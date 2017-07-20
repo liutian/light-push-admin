@@ -1,6 +1,8 @@
+@import 'var';
+
 :host > [fxLayout] {
   height: 100%;
-  background-color: rgba(63, 81, 181,1);
+  background-color: $primary-color;
 }
 
 .login{

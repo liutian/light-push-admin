@@ -1,8 +1,10 @@
+
+@import '~@angular/material/theming';
 $h-height: 60px;
 $b-height: 50px;
 $dashboard-width: 65%;
 $dashboard-height: 550px;
 $padding: 15px;
-$tab-width: 50px;
 
 $active-color: #aaa;
+$primary-color: map-get($mat-cyan, 500);

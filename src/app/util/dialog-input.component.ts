@@ -10,8 +10,8 @@ import { MD_DIALOG_DATA } from '@angular/material';
       </md-input-container>
     </md-dialog-content>
     <md-dialog-actions>
-      <button md-button [md-dialog-close]="roomRef.value" color="primary">添加</button>
-      <button md-button [md-dialog-close]="-1">取消</button>
+      <button md-button [md-dialog-close]="-1" md-raised-button>取消</button>&nbsp;&nbsp;
+      <button md-button [md-dialog-close]="roomRef.value" md-raised-button color="accent">添加</button>
     </md-dialog-actions>
   `
 })
