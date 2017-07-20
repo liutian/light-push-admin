@@ -11,12 +11,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of list | async">
+    <tr *ngFor="let item of list ">
       <td>{{item.id}}</td>
       <td>{{item.room}}</td>
       <td style="max-width: 15em;word-break:break-all;padding-right: 1em;">
-        {{item.pushData | slice:0:20 }}
-        <a (click)="showMorePushData(item.pushData)" *ngIf="item.pushData.length >= 20">查看更多</a>
+        {{item.pushData | slice:0:40 }}
+        <a (click)="showMorePushData(item.pushData)" *ngIf="item.pushData.length >= 40">查看更多</a>
       </td>
       <td>{{item.sendDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>{{item.leaveMessage == 'true' ? '是' : '否'}}</td>
@@ -27,6 +27,6 @@
   </tbody>
 </table>
 
-<div class="no-result" *ngIf="!((list | async) || []).length">
+<div class="no-result" *ngIf="!list?.length">
   暂无数据
 </div>

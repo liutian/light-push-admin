@@ -10,7 +10,7 @@ import { DialogComponent } from '../../../util/dialog.component';
   styleUrls: ['./overview-list.component.scss']
 })
 export class OverviewListComponent implements OnInit {
-  list: Promise<any[]>;
+  list: [any];
   page: number;
 
   constructor(private apiService: ApiService, private dialog: MdDialog) {
@@ -18,7 +18,9 @@ export class OverviewListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.list = this.apiService.reportList('pageSize=100');
+    this.apiService.reportList('size=50').then(d => {
+      this.list = d;
+    });
   }
 
   showMorePushData(data) {

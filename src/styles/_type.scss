@@ -3,9 +3,14 @@
 }
 
 html,body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
+  position: relative;
+
+  font-family: '微软雅黑', 'Microsoft YaHei', '宋体', Tahoma, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 a{

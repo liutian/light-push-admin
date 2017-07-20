@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import { Http, RequestMethod } from '@angular/http';
 import { environment } from 'environments/environment';
 import { Headers } from '@angular/http';
 import { Base64 } from 'js-base64';
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 
 import { DialogComponent } from './dialog.component';
 
@@ -12,8 +13,9 @@ import { DialogComponent } from './dialog.component';
 export class ApiService {
   private authKey = 'push_auth';
   auth: string;
+  private showErrorDialog: boolean;
 
-  constructor(private http: Http, private dialog: MdDialog) {
+  constructor(private http: Http, private dialog: MdDialog, private router: Router) {
     this.auth = window.localStorage.getItem(this.authKey);
   }
 
@@ -45,125 +47,64 @@ export class ApiService {
   }
 
   onlineReport(params?) {
-    if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
-      return;
-    }
-
-    let url = environment.api + '/api/auth/report/online';
-    let headers = new Headers();
-    headers.set('Authorization', this.auth);
-
     let query = params ? '?' + params : '';
-    return this.http.get(url + query, {
-      headers: headers
-    }).toPromise().then(function (res) {
-      return res.json();
-    })
+
+    return this.authHttp('/api/auth/report/online' + query);
   }
 
   nsQueryList() {
-    if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
-      return;
-    }
-
-    let url = environment.api + '/api/admin/namespace/list';
-    let headers = new Headers();
-    headers.set('Authorization', this.auth);
-
-    return this.http.get(url, {
-      headers: headers
-    }).toPromise().then(function (res) {
-      return res.json();
-    });
+    return this.authHttp('/api/admin/namespace/list');
   }
 
   push(data) {
-    if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
-      return;
-    }
-
-    let url = environment.api + '/api/auth/push';
-    let headers = new Headers();
-    headers.set('Authorization', this.auth);
-
-    return this.http.post(url, data, {
-      headers: headers
-    }).toPromise().then(function (res) {
-      return res.json();
-    });
+    return this.authHttp('/api/auth/push', RequestMethod.Post, data);
   }
 
   pushReport(id, params?) {
-    if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
-      return;
-    }
-
     let query = params ? '?' + params : '';
-    let url = environment.api + '/api/auth/report/push/' + id + query;
-    let headers = new Headers();
-    headers.set('Authorization', this.auth);
 
-    return this.http.get(url, {
-      headers: headers
-    }).toPromise().then(function (res) {
-      return res.json();
-    })
+    return this.authHttp('/api/auth/report/push/' + id + query);
   }
 
   reportList(params?) {
-    if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
-      return;
-    }
-
     let query = params ? '?' + params : '';
-    let url = environment.api + '/api/auth/report/push' + query;
-    let headers = new Headers();
-    headers.set('Authorization', this.auth);
 
-    return this.http.get(url, {
-      headers: headers
-    }).toPromise().then(function (res) {
-      return res.json();
-    })
+    return this.authHttp('/api/auth/report/push' + query);
   }
 
   saveNamespace(data) {
-    if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
-      return;
-    }
-
-    let url = environment.api + '/api/admin/namespace/save';
-    let headers = new Headers();
-    headers.set('Authorization', this.auth);
-
-    return this.http.post(url, data, {
-      headers: headers
-    }).toPromise().then(function (res) {
-      return res.json();
-    })
+    return this.authHttp('/api/admin/namespace/save', RequestMethod.Post, data);
   }
 
   delNamespace(key) {
+    return this.authHttp('/api/admin/namespace/del' + key);
+  }
+
+  private authHttp(url: string, method?: RequestMethod, data?: any): Promise<any> {
     if (!this.auth) {
-      this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
-      return;
+      if (!this.showErrorDialog) {
+        let dialogRef = this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
+        dialogRef.afterClosed().subscribe(function () {
+          this.showErrorDialog = false;
+        });
+
+        setTimeout(() => {
+          dialogRef.close();
+        }, 3000);
+        this.showErrorDialog = true;
+      }
+      this.router.navigateByUrl('/welcome');
+      return Observable.throw(new Error('valid error')).toPromise();
     }
 
-    let url = environment.api + '/api/admin/namespace/del' + key;
+    url = environment.api + url;
     let headers = new Headers();
     headers.set('Authorization', this.auth);
 
-    return this.http.get(url, {
-      headers: headers
-    }).toPromise().then(function (res) {
-      return res.json();
-    })
-
+    if (method === RequestMethod.Post) {
+      return this.http.post(url, data, { headers: headers }).map(res => res.json()).toPromise();
+    } else {
+      return this.http.get(url, { headers: headers }).map(res => res.json()).toPromise();
+    }
   }
 }
