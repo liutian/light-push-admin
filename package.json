@@ -6,7 +6,7 @@
     "ng": "./node_modules/.bin/ng",
     "start": "./node_modules/.bin/ng serve --open ",
     "dev": "./node_modules/.bin/ng serve --open --hmr",
-    "build": "./node_modules/.bin/ng build -prod",
+    "build": "./node_modules/.bin/ng build -prod --base-href /push-admin/",
     "test": "./node_modules/.bin/ng test",
     "lint": "./node_modules/.bin/ng lint",
     "e2e": "./node_modules/.bin/ng e2e"

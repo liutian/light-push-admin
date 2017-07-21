@@ -1,4 +1,4 @@
 export const environment = {
-  api: 'http://ipush-test.visionet.cn/push-logic/',
+  api: 'http://127.0.0.1/push-logic',
   production: true
 };
