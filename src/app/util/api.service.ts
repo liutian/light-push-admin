@@ -78,6 +78,10 @@ export class ApiService {
     return this.authHttp('/api/admin/namespace/del' + key);
   }
 
+  clearDirtyClient(data) {
+    return this.authHttp('/api/admin/namespace/clear-dirty-client', RequestMethod.Post, data);
+  }
+
   private authHttp(url: string, method?: RequestMethod, data?: any): Promise<any> {
     if (!this.auth) {
       if (!this.showErrorDialog) {
@@ -105,4 +109,6 @@ export class ApiService {
       return this.http.get(url, { headers }).map(res => res.json()).toPromise();
     }
   }
+
+
 }

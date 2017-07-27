@@ -17,6 +17,20 @@
       <md-error>必填</md-error>
     </md-input-container>
 
+    <div class="clearfix">
+      <md-slide-toggle class="pull-left" checked="namespace.offline" color="warn" name="ns-offline" [(ngModel)]="namespace.offline">服务下线</md-slide-toggle>
+
+      <button type="button" color="warn" class="pull-right" (click)="clearDirtyClient()" [disabled]="!namespace.offline" md-raised-button>清理遗留数据</button>
+    </div>
+
+    <md-input-container>
+      <input mdInput type="text" placeholder="下线回调接口" [(ngModel)]="namespace.disconnect_callback" name="ns-disconnect_callback">
+    </md-input-container>
+
+    <md-input-container>
+      <input mdInput type="text" placeholder="上线回调接口" [(ngModel)]="namespace.connect_callback" name="ns-connect_callback">
+    </md-input-container>
+
     <div class="apns-item" *ngFor="let apns of namespace.apns_list">
       <md-input-container>
         <input mdInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required [disabled]="!apns.isNew">
