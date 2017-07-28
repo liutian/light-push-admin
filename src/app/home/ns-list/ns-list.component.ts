@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdDialog } from '@angular/material';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { ApiService } from 'app/util/api.service';
 import { UserService } from 'app/util/user.service';
@@ -16,17 +17,39 @@ import { DialogComponent } from 'app/util/dialog.component';
 export class NsListComponent implements OnInit {
 
   nsList: any[];
+  searchForm: any;
+  nsListAll: any[];
+  searchKeySubject = new BehaviorSubject<string>('');
+  searchNameSubject = new BehaviorSubject<string>('');
 
   constructor(private apiService: ApiService,
     private router: Router,
     private dialog: MdDialog,
-    private user: UserService) { }
+    private user: UserService) {
+  }
 
   ngOnInit() {
     this.apiService.encodeAuth(this.user.key, this.user.password);
     this.apiService.nsQueryList().then(v => {
+      this.nsListAll = v;
       this.nsList = v;
     });
+    Observable.combineLatest(this.searchKeySubject, this.searchNameSubject).debounceTime(1000).distinctUntilChanged().subscribe(arr => {
+      this.nsList = this.nsListAll.filter(v => {
+        let match = true;
+
+        if (arr[0] && !v.key.includes(arr[0])) {
+          match = false;
+        }
+        if (arr[1] && !v.name.includes(arr[1])) {
+          match = false;
+        }
+
+        return match;
+      });
+
+      console.dir(this.nsList);
+    })
   }
 
   addNs() {
@@ -41,6 +64,7 @@ export class NsListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
       this.apiService.nsQueryList().then(v => {
+        this.nsListAll = v;
         this.nsList = v;
       });
     });
@@ -60,6 +84,7 @@ export class NsListComponent implements OnInit {
       if (!result) return;
 
       this.apiService.nsQueryList().then(v => {
+        this.nsListAll = v;
         this.nsList = v;
       });
     });

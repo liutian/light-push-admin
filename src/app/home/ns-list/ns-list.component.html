@@ -1,6 +1,14 @@
-<div class="add-ns">
-  <a md-raised-button color="accent" (click)="addNs()">新增命名空间</a>
-</div>
+<form class="ns-form">
+  <a md-raised-button color="accent" (click)="addNs()">新增命名空间</a> &nbsp;&nbsp;&nbsp;&nbsp;
+  <md-input-container>
+    <input mdInput type="text" placeholder="命名空间" (keyup)="searchKeySubject.next(searchKey.value)" #searchKey>
+  </md-input-container>
+
+  <md-input-container>
+    <input mdInput type="text" placeholder="名称1" (keyup)="searchNameSubject.next(searchName.value)" #searchName>
+  </md-input-container>
+
+</form>
 
 <table class="table">
   <thead>
