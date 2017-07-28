@@ -7,7 +7,8 @@
     "start": "./node_modules/.bin/ng serve --open ",
     "dev": "./node_modules/.bin/ng serve --open --hmr",
     "build-local": "./node_modules/.bin/ng build -prod ",
-    "build": "./node_modules/.bin/ng build -prod --base-href /push-admin/",
+    "build-test": "./node_modules/.bin/ng build -prod --base-href /push-admin/ -e test",
+    "build-prod": "./node_modules/.bin/ng build -prod --base-href /push-admin/ -e prod",
     "test": "./node_modules/.bin/ng test",
     "lint": "./node_modules/.bin/ng lint",
     "e2e": "./node_modules/.bin/ng e2e"
