@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,8 +21,10 @@ import { OverviewEmitterComponent } from './home/overview/overview-emitter/overv
 import { OverviewListComponent } from './home/overview/overview-list/overview-list.component';
 import { UserService } from './util/user.service';
 import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
+import { CommonInterceptorService } from "app/util/common-interceptor.service";
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     WelcomeComponent,
@@ -44,14 +46,22 @@ import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
   ],
   imports: [
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     FlexLayoutModule,
     MaterialModule,
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [ApiService, UserService],
+  providers: [
+    ApiService,
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CommonInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

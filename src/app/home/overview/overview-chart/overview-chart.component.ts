@@ -12,14 +12,14 @@ import { DialogInputComponent } from 'app/util/dialog-input.component';
   styleUrls: ['./overview-chart.component.scss']
 })
 export class OverviewChartComponent implements OnInit, OnDestroy {
-  private chartOption: any;
-  private fetchTimeout: number;
   optionObservable: any;
   optionObserver: any;
   chartOptionOverview: any;
   roomList: any[];
   activeTab: string;
   currChartType: string;
+  private chartOption: any;
+  private fetchTimeout: number;
 
   constructor(private apiService: ApiService,
     private dialog: MdDialog) {

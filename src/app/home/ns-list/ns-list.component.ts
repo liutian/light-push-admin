@@ -48,7 +48,6 @@ export class NsListComponent implements OnInit {
         return match;
       });
 
-      console.dir(this.nsList);
     })
   }
 
