@@ -4,9 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  apiPath: '//127.0.0.1/push-logic',
+  apiPath: '/push-logic',
   production: false,
-  pushServer: '//127.0.0.1',
-  pushScirpt: '//127.0.0.1/push',
+  pushServer: '',
+  pushScirpt: '/push',
   pushOptionPath: '/push/socket.io/'
 };
