@@ -7,6 +7,7 @@ interface NodeModule {
 interface Window {
   LazyLoad: any;
   echarts: any;
+  io: any;
 }
 
 interface String {

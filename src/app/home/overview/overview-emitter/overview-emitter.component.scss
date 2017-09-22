@@ -29,3 +29,26 @@ textarea{
     text-decoration: underline;
   }
 }
+
+.message-list{
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  max-height: 200px;
+  overflow: auto;
+
+  .title{
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  .message{
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+}

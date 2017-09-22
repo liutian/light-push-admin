@@ -90,6 +90,7 @@ export class NsListComponent implements OnInit {
   }
 
   nsEnter(ns) {
+    this.user.save({ namespace: ns.key });
     this.apiService.encodeAuth(ns.key, ns.auth_passwd);
     this.router.navigate(['home']);
     return false;

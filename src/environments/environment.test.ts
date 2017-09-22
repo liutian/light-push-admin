@@ -5,5 +5,7 @@
 
 export const environment = {
   apiPath: '//ipush-test.visionet.cn/push-logic',
-  production: false
+  production: false,
+  pushServer: '//ipush-test.visionet.cn',
+  pushScirpt: '//ipush-test.visionet.cn/push'
 };

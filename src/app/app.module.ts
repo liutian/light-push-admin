@@ -22,6 +22,7 @@ import { OverviewListComponent } from './home/overview/overview-list/overview-li
 import { UserService } from './util/user.service';
 import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
 import { CommonInterceptorService } from "app/util/common-interceptor.service";
+import { SocketService } from "app/util/socket.service";
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -54,6 +55,7 @@ import { CommonInterceptorService } from "app/util/common-interceptor.service";
     AppRoutingModule
   ],
   providers: [
+    SocketService,
     ApiService,
     UserService,
     {
