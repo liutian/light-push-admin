@@ -73,7 +73,7 @@ export class OverviewEmitterComponent implements OnInit {
       platform: (this.simulateForm.platform || undefined),
       scriptPath: environment.pushScirpt,
       option: {
-        path: '/push/socket.io/'
+        path: environment.pushOptionPath
       }
     });
     this.initConnect();
