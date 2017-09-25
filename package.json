@@ -6,6 +6,7 @@
     "ng": "./node_modules/.bin/ng",
     "start": "ng serve --open ",
     "dev": "ng serve --open --hmr",
+    "build-test": "ng build -prod --base-href /push-admin/ -e test",
     "build": "ng build -prod --base-href /push-admin/ --deploy-url https://ipush-cdn.visionet.cn/push-admin",
     "build-docker": "ng build -prod -e dev",
     "test": "ng test",
