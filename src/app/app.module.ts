@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MaterialModule } from '@angular/material';
+import {
+  MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatSnackBarModule,
+  MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, MatSlideToggleModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -21,8 +24,8 @@ import { OverviewEmitterComponent } from './home/overview/overview-emitter/overv
 import { OverviewListComponent } from './home/overview/overview-list/overview-list.component';
 import { UserService } from './util/user.service';
 import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
-import { CommonInterceptorService } from "app/util/common-interceptor.service";
-import { SocketService } from "app/util/socket.service";
+import { CommonInterceptorService } from 'app/util/common-interceptor.service';
+import { SocketService } from 'app/util/socket.service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -50,9 +53,10 @@ import { SocketService } from "app/util/socket.service";
     HttpClientModule,
     FormsModule,
     FlexLayoutModule,
-    MaterialModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatSnackBarModule,
+    MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, MatSlideToggleModule
   ],
   providers: [
     SocketService,

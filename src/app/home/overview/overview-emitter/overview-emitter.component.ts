@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
-import { MdDialog } from '@angular/material';
-import { Subscription } from "rxjs/Subscription";
+import { MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 
 import { ApiService } from 'app/util/api.service';
-import { SocketService } from "app/util/socket.service";
-import { environment } from "environments/environment";
-import { UserService } from "app/util/user.service";
+import { SocketService } from 'app/util/socket.service';
+import { environment } from 'environments/environment';
+import { UserService } from 'app/util/user.service';
 import { DialogComponent } from 'app/util/dialog.component';
 
 @Component({
@@ -26,10 +26,10 @@ export class OverviewEmitterComponent implements OnInit {
   pushMessageSubscription: Subscription;
 
   constructor(
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private userService: UserService,
     private apiService: ApiService,
-    private snackBar: MdSnackBar,
+    private snackBar: MatSnackBar,
     public socketService: SocketService) {
     this.leaveMessage = true;
     this.messageForm = {
@@ -44,7 +44,7 @@ export class OverviewEmitterComponent implements OnInit {
   }
 
   sendMessage() {
-    let data = Object.assign({}, this.messageForm);
+    const data = Object.assign({}, this.messageForm);
     data.pushData = JSON.parse(this.messageForm.pushData);
     this.apiService.push(data).then(res => {
       this.snackBar.open(`消息推送成功 id: ${res.id}`, null, { duration: 3000 });
@@ -103,7 +103,7 @@ export class OverviewEmitterComponent implements OnInit {
 
   joinRoom() {
     this.socketService.joinRoom(this.simulateForm.joinRooms.split(','), (res) => {
-      if (res.status != 200) {
+      if (res.status !== 200) {
         const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
         setTimeout(() => {
           dialogRef.close();
@@ -114,7 +114,7 @@ export class OverviewEmitterComponent implements OnInit {
 
   leaveRoom() {
     this.socketService.leaveRoom(this.simulateForm.leaveRooms.split(','), (res) => {
-      if (res.status != 200) {
+      if (res.status !== 200) {
         const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
         setTimeout(() => {
           dialogRef.close();
@@ -131,7 +131,7 @@ export class OverviewEmitterComponent implements OnInit {
 
   setClientInfo() {
     this.socketService.setInfo(JSON.parse(this.simulateForm.clientInfo), (res) => {
-      if (res.status != 200) {
+      if (res.status !== 200) {
         const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
         setTimeout(() => {
           dialogRef.close();

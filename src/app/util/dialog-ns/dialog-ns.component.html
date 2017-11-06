@@ -1,69 +1,63 @@
 <form (ngSubmit)="saveNamespace()" #nsForm="ngForm">
 
-  <h2 md-dialog-title>{{isNew ? '新增命名空间' : '编辑命名空间'}}</h2>
-  <md-dialog-content>
-    <md-input-container>
-      <input mdInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required [readonly]="!isNew" [disabled]="!isNew">
-      <md-error>必填</md-error>
-    </md-input-container>
+  <h2 mat-dialog-title>{{isNew ? '新增命名空间' : '编辑命名空间'}}</h2>
+  <mat-dialog-content>
+    <mat-input-container>
+      <input matInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required [readonly]="!isNew" [disabled]="!isNew">
+      <mat-error>必填</mat-error>
+    </mat-input-container>
 
-    <md-input-container>
-      <input mdInput type="text" placeholder="名称" [(ngModel)]="namespace.name" name="ns-name" required>
-      <md-error>必填</md-error>
-    </md-input-container>
+    <mat-input-container>
+      <input matInput type="text" placeholder="名称" [(ngModel)]="namespace.name" name="ns-name" required>
+      <mat-error>必填</mat-error>
+    </mat-input-container>
 
-    <md-input-container>
-      <input mdInput type="password" placeholder="密码" [(ngModel)]="namespace.auth_passwd" name="ns-auth_passwd" required>
-      <md-error>必填</md-error>
-    </md-input-container>
+    <mat-input-container>
+      <input matInput type="password" placeholder="密码" [(ngModel)]="namespace.auth_passwd" name="ns-auth_passwd" required>
+      <mat-error>必填</mat-error>
+    </mat-input-container>
 
-    <div class="clearfix">
-      <md-slide-toggle class="pull-left" checked="namespace.offline" color="warn" name="ns-offline" [(ngModel)]="namespace.offline">服务下线</md-slide-toggle>
+    <mat-input-container>
+      <input matInput type="text" placeholder="下线回调接口" [(ngModel)]="namespace.disconnect_callback" name="ns-disconnect_callback">
+    </mat-input-container>
 
-      <button type="button" color="warn" class="pull-right" (click)="clearDirtyClient()" [disabled]="!namespace.offline" md-raised-button>清理遗留数据</button>
-    </div>
-
-    <md-input-container>
-      <input mdInput type="text" placeholder="下线回调接口" [(ngModel)]="namespace.disconnect_callback" name="ns-disconnect_callback">
-    </md-input-container>
-
-    <md-input-container>
-      <input mdInput type="text" placeholder="上线回调接口" [(ngModel)]="namespace.connect_callback" name="ns-connect_callback">
-    </md-input-container>
+    <mat-input-container>
+      <input matInput type="text" placeholder="上线回调接口" [(ngModel)]="namespace.connect_callback" name="ns-connect_callback">
+    </mat-input-container>
 
     <div class="apns-item" *ngFor="let apns of namespace.apns_list">
-      <md-input-container>
-        <input mdInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required [disabled]="!apns.isNew">
-        <button type="button" md-button mdSuffix *ngIf="!apns.isNew" (click)="toggleDel(apns)" class="apns-del-btn" [class.del]="apns.del"
+      <mat-input-container>
+        <input matInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required [disabled]="!apns.isNew">
+        <button type="button" mat-button matSuffix *ngIf="!apns.isNew" (click)="toggleDel(apns)" class="apns-del-btn" [class.del]="apns.del"
           color="warn">删除apns</button>
-        <md-error>必填</md-error>
-      </md-input-container>
+        <mat-error>必填</mat-error>
+      </mat-input-container>
 
-      <md-radio-group [value]="apns.apns_env" (change)="apns.apns_env = $event.value">
-        <md-radio-button [value]="'production'">生产环境证书</md-radio-button>
-        <md-radio-button [value]="'dev'">测试环境证书</md-radio-button>
-      </md-radio-group>
-      <md-input-container>
-        <textarea mdInput placeholder="测试证书cert" [(ngModel)]="apns.apns_dev_cert" name="apns-apns_dev_cert"></textarea>
-      </md-input-container>
+      <mat-radio-group [value]="apns.apns_env" (change)="apns.apns_env = $event.value">
+        <mat-radio-button [value]="'production'">生产环境证书</mat-radio-button>
+        <mat-radio-button [value]="'dev'">测试环境证书</mat-radio-button>
+      </mat-radio-group>
+      <mat-input-container>
+        <textarea matInput placeholder="测试证书cert" [(ngModel)]="apns.apns_dev_cert" name="apns-apns_dev_cert"></textarea>
+      </mat-input-container>
 
-      <md-input-container>
-        <textarea mdInput placeholder="测试证书key" [(ngModel)]="apns.apns_dev_key" name="apns-apns_dev_key"></textarea>
-      </md-input-container>
+      <mat-input-container>
+        <textarea matInput placeholder="测试证书key" [(ngModel)]="apns.apns_dev_key" name="apns-apns_dev_key"></textarea>
+      </mat-input-container>
 
-      <md-input-container>
-        <textarea mdInput placeholder="生产证书cert" [(ngModel)]="apns.apns_production_cert" name="apns-apns_production_cert"></textarea>
-      </md-input-container>
+      <mat-input-container>
+        <textarea matInput placeholder="生产证书cert" [(ngModel)]="apns.apns_production_cert" name="apns-apns_production_cert"></textarea>
+      </mat-input-container>
 
-      <md-input-container>
-        <textarea mdInput placeholder="生产证书key" [(ngModel)]="apns.apns_production_key" name="apns-apns_production_key"></textarea>
-      </md-input-container>
+      <mat-input-container>
+        <textarea matInput placeholder="生产证书key" [(ngModel)]="apns.apns_production_key" name="apns-apns_production_key"></textarea>
+      </mat-input-container>
     </div>
 
-  </md-dialog-content>
+  </mat-dialog-content>
   <div class="clearfix action">
-    <button type="submit" class="pull-right" md-raised-button color="accent" [disabled]="nsForm.form.invalid">保存</button>
-    <button type="button" class="pull-right" (click)="addApns()" md-raised-button color="accent">新增apns证书</button>
-    <button type="button" class="pull-right" md-dialog-close md-raised-button>取消</button>
+    <button type="submit" class="pull-right" mat-raised-button color="accent" [disabled]="nsForm.form.invalid">保存</button>
+    <button type="button" class="pull-right" (click)="addApns()" mat-raised-button color="accent">新增apns证书</button>
+    <button type="button" class="pull-right" mat-dialog-close mat-raised-button>取消</button>
   </div>
 </form>

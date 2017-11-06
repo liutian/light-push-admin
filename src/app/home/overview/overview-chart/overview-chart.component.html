@@ -1,9 +1,9 @@
-<nav md-tab-nav-bar>
-  <a md-tab-link (click)="toggleChartView('')" [active]="!activeTab">总览</a>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link (click)="toggleChartView('')" [active]="!activeTab">总览</a>
 
-  <a md-tab-link *ngFor="let room of roomList" (click)="toggleChartView(room.name)" [active]="activeTab === room.name">{{room.name}}</a>
+  <a mat-tab-link *ngFor="let room of roomList" (click)="toggleChartView(room.name)" [active]="activeTab === room.name">{{room.name}}</a>
 
-  <a md-tab-link (click)="showAddRoom()">
+  <a mat-tab-link (click)="showAddRoom()">
     +新增
   </a>
 </nav>
@@ -11,7 +11,7 @@
 <p-chart class="chart" [optionObservable]="optionObservable" chartHeight="550"></p-chart>
 
 <div class="action-btn-group" *ngIf="activeTab">
-  <button type="button" md-raised-button (click)="removeRoom(activeTab)">关闭</button>
-  <button type="button" md-raised-button (click)="toggleChartType('pie')" [disabled]="currChartType == 'pie'">客户端占比</button>
-  <button type="button" md-raised-button (click)="toggleChartType('line')" [disabled]="currChartType == 'line'">实时数据</button>
+  <button type="button" mat-raised-button (click)="removeRoom(activeTab)">关闭</button>
+  <button type="button" mat-raised-button (click)="toggleChartType('pie')" [disabled]="currChartType == 'pie'">客户端占比</button>
+  <button type="button" mat-raised-button (click)="toggleChartType('line')" [disabled]="currChartType == 'line'">实时数据</button>
 </div>

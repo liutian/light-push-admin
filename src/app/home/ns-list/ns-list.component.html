@@ -1,12 +1,12 @@
 <form class="ns-form">
-  <a md-raised-button color="accent" (click)="addNs()">新增命名空间</a> &nbsp;&nbsp;&nbsp;&nbsp;
-  <md-input-container>
-    <input mdInput type="text" placeholder="命名空间" (keyup)="searchKeySubject.next(searchKey.value)" #searchKey>
-  </md-input-container>
+  <a mat-raised-button color="accent" (click)="addNs()">新增命名空间</a> &nbsp;&nbsp;&nbsp;&nbsp;
+  <mat-input-container>
+    <input matInput type="text" placeholder="命名空间" (keyup)="searchKeySubject.next(searchKey.value)" #searchKey>
+  </mat-input-container>
 
-  <md-input-container>
-    <input mdInput type="text" placeholder="名称" (keyup)="searchNameSubject.next(searchName.value)" #searchName>
-  </md-input-container>
+  <mat-input-container>
+    <input matInput type="text" placeholder="名称" (keyup)="searchNameSubject.next(searchName.value)" #searchName>
+  </mat-input-container>
 
 </form>
 
@@ -27,11 +27,18 @@
       <td>{{item.auth_passwd}}</td>
       <td>{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>
-        <button md-button color="accent" (click)="nsEnter(item)">
+        <button mat-button color="accent" (click)="nsEnter(item)">
           进入
         </button>
-        <button md-button (click)="updateNs(item)" color="accent">编辑</button>
-        <button md-button (click)="delNs(item,i)" color="warn" *ngIf="item.key != '/'">删除</button>
+        <button mat-button (click)="updateNs(item)" color="accent">编辑</button>
+        <mat-menu #moreMenu="matMenu">
+          <button mat-menu-item (click)="toggleOffline(item)" color="accent">{{item.offline === 'off' ? '服务下线':'服务上线'}}</button>
+          <button mat-menu-item (click)="clearRealTimeData(item,i)" color="warn" [disabled]="item.offline === 'off'">清空实时数据</button>
+          <button mat-menu-item (click)="clearLegacyClient(item,i)" color="warn" [disabled]="item.offline === 'off'">删除僵尸客户端</button>
+          <button mat-menu-item (click)="clearNs(item,i)" color="warn" [disabled]="item.offline === 'off'">清空数据</button>
+          <button mat-menu-item (click)="flushNs(item,i)" color="warn" [disabled]="item.offline === 'off'">删除</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="moreMenu" color="accent">更多</button>
       </td>
     </tr>
   </tbody>

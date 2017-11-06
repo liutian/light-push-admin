@@ -1,18 +1,18 @@
 import { Component, Inject } from '@angular/core';
-import { MD_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   template: `
-    <md-dialog-content>
+    <mat-dialog-content>
       <pre *ngIf="data.pre">{{data.des}}</pre>
       <div *ngIf="!data.pre">{{data.des}}</div>
-    </md-dialog-content>
-    <md-dialog-actions *ngIf="data.confirm">
-      <button md-button md-dialog-close md-raised-button>取消</button>&nbsp;&nbsp;
-      <button md-raised-button color="accent" [md-dialog-close]="true">确定</button>
-    </md-dialog-actions>
+    </mat-dialog-content>
+    <mat-dialog-actions *ngIf="data.confirm">
+      <button mat-button mat-dialog-close mat-raised-button>取消</button>&nbsp;&nbsp;
+      <button mat-raised-button color="accent" [mat-dialog-close]="true">确定</button>
+    </mat-dialog-actions>
   `
 })
 export class DialogComponent {
-  constructor( @Inject(MD_DIALOG_DATA) public data: any) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any) { }
 }

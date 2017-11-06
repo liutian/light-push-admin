@@ -1,29 +1,29 @@
-<nav md-tab-nav-bar>
-  <a md-tab-link [active]="currTab == 'push'" (click)="currTab = 'push'">推送数据</a>
-  <a md-tab-link [active]="currTab == 'report'" (click)="currTab = 'report'">推送报告</a>
-  <a md-tab-link [active]="currTab == 'simulate'" (click)="currTab = 'simulate'">模拟客户端</a>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link [active]="currTab == 'push'" (click)="currTab = 'push'">推送数据</a>
+  <a mat-tab-link [active]="currTab == 'report'" (click)="currTab = 'report'">推送报告</a>
+  <a mat-tab-link [active]="currTab == 'simulate'" (click)="currTab = 'simulate'">模拟客户端</a>
 </nav>
 
 <form (ngSubmit)="sendMessage()" autocomplete="off" *ngIf="currTab == 'push'" #sendMessageForm="ngForm">
 
-  <md-input-container>
-    <input type="text" mdInput [(ngModel)]="messageForm.room" name="room" color="warn" placeholder="输入房间名" required>
-    <md-error>必填</md-error>
-  </md-input-container>
+  <mat-input-container>
+    <input type="text" matInput [(ngModel)]="messageForm.room" name="room" color="warn" placeholder="输入房间名" required>
+    <mat-error>必填</mat-error>
+  </mat-input-container>
 
-  <md-input-container>
-    <textarea mdInput rows="7" [(ngModel)]="messageForm.pushData" name="pushData" placeholder="输入推送数据" required></textarea>
-    <md-error>必填</md-error>
-    <md-hint>必须是JSON字符串</md-hint>
-  </md-input-container>
+  <mat-input-container>
+    <textarea matInput rows="7" [(ngModel)]="messageForm.pushData" name="pushData" placeholder="输入推送数据" required></textarea>
+    <mat-error>必填</mat-error>
+    <mat-hint>必须是JSON字符串</mat-hint>
+  </mat-input-container>
 
-  <md-input-container>
-    <input type="text" mdInput [(ngModel)]="messageForm.apnsName" name="apnsName" placeholder="输入apnsName">
-  </md-input-container>
+  <mat-input-container>
+    <input type="text" matInput [(ngModel)]="messageForm.apnsName" name="apnsName" placeholder="输入apnsName">
+  </mat-input-container>
 
   <div style="text-align: right;">
-    <md-slide-toggle checked="messageForm.leaveMessage" color="accent" name="leaveMessage" [(ngModel)]="messageForm.leaveMessage">离线保存</md-slide-toggle>
-    <button type="submit" [disabled]="sendMessageForm.form.invalid" md-raised-button color="accent">发送</button>
+    <mat-slide-toggle [checked]="messageForm.leaveMessage" color="accent">离线保存</mat-slide-toggle>
+    <button type="submit" [disabled]="sendMessageForm.form.invalid" mat-raised-button color="accent">发送</button>
   </div>
 
   <div class="toggle-to-report" *ngIf="sendId">
@@ -35,11 +35,11 @@
 
 
 <form (ngSubmit)="report()" autocomplete="off" *ngIf="currTab == 'report'">
-  <md-input-container>
-    <input type="text" mdInput [(ngModel)]="reportMessageId" name="reportMessageId" color="warn" placeholder="输入消息ID查询" required>
-    <button type="submit" md-raised-button [disabled]="!reportMessageId" color="accent" mdSuffix>查看</button>
-    <md-error>必填</md-error>
-  </md-input-container>
+  <mat-input-container>
+    <input type="text" matInput [(ngModel)]="reportMessageId" name="reportMessageId" color="warn" placeholder="输入消息ID查询" required>
+    <button type="submit" mat-raised-button [disabled]="!reportMessageId" color="accent" matSuffix>查看</button>
+    <mat-error>必填</mat-error>
+  </mat-input-container>
 
   <textarea rows="20" readonly disabled name="reportMessage" [(ngModel)]="reportMessage"></textarea>
 </form>
@@ -48,24 +48,24 @@
   <form (ngSubmit)="connect()" #conectionForm="ngForm">
     <div [hidden]="socketService.ready">
 
-      <md-input-container>
-        <input type="text" mdInput [(ngModel)]="simulateForm.userid" name="userid" color="warn" placeholder="输入客户端userid" required>
-        <md-error>必填</md-error>
-      </md-input-container>
+      <mat-input-container>
+        <input type="text" matInput [(ngModel)]="simulateForm.userid" name="userid" color="warn" placeholder="输入客户端userid" required>
+        <mat-error>必填</mat-error>
+      </mat-input-container>
 
-      <md-input-container>
-        <input type="text" mdInput [(ngModel)]="simulateForm.uuid" name="uuid" color="warn" placeholder="输入客户端uuid" required>
-        <md-error>必填</md-error>
-      </md-input-container>
+      <mat-input-container>
+        <input type="text" matInput [(ngModel)]="simulateForm.uuid" name="uuid" color="warn" placeholder="输入客户端uuid" required>
+        <mat-error>必填</mat-error>
+      </mat-input-container>
 
-      <md-input-container>
-        <input type="text" mdInput [(ngModel)]="simulateForm.platform" name="platform" color="warn" placeholder="输入客户端所属平台">
-      </md-input-container>
+      <mat-input-container>
+        <input type="text" matInput [(ngModel)]="simulateForm.platform" name="platform" color="warn" placeholder="输入客户端所属平台">
+      </mat-input-container>
 
       <div style="text-align: right;">
-        <md-slide-toggle checked="simulateForm.activityBroadcast" color="accent" name="activityBroadcast" [(ngModel)]="simulateForm.activityBroadcast">上线/下线提醒</md-slide-toggle>
+        <mat-slide-toggle checked="simulateForm.activityBroadcast" color="accent" name="activityBroadcast" [(ngModel)]="simulateForm.activityBroadcast">上线/下线提醒</mat-slide-toggle>
 
-        <button type="submit" [disabled]="conectionForm.form.invalid" *ngIf="!socketService.ready" md-raised-button color="accent">上线</button>
+        <button type="submit" [disabled]="conectionForm.form.invalid" *ngIf="!socketService.ready" mat-raised-button color="accent">上线</button>
       </div>
     </div>
 
@@ -73,32 +73,33 @@
 
       <section class="message-list">
         <div class="title">
-          <b>userid:</b> {{simulateForm.userid}} <b>uuid:</b> {{simulateForm.uuid}}
+          <b>userid:</b> {{simulateForm.userid}}
+          <b>uuid:</b> {{simulateForm.uuid}}
         </div>
         <div *ngFor="let item of messageList" class="message" (click)="showMessage(item)">{{item | json}}</div>
       </section>
 
-      <md-input-container>
-        <input type="text" mdInput [(ngModel)]="simulateForm.joinRooms" name="joinRooms" color="warn" placeholder="输入房间，已逗号分隔">
-        <button type="button" md-raised-button (click)="joinRoom()" [disabled]="!simulateForm.joinRooms" color="accent" mdSuffix>加入房间</button>
-      </md-input-container>
+      <mat-input-container>
+        <input type="text" matInput [(ngModel)]="simulateForm.joinRooms" name="joinRooms" color="warn" placeholder="输入房间，已逗号分隔">
+        <button type="button" mat-raised-button (click)="joinRoom()" [disabled]="!simulateForm.joinRooms" color="accent" matSuffix>加入房间</button>
+      </mat-input-container>
 
-      <md-input-container>
-        <input type="text" mdInput [(ngModel)]="simulateForm.leaveRooms" name="leaveRooms" color="warn" placeholder="输入房间，已逗号分隔">
-        <button type="button" md-raised-button (click)="leaveRoom()" [disabled]="!simulateForm.leaveRooms" color="accent" mdSuffix>离开房间</button>
-      </md-input-container>
+      <mat-input-container>
+        <input type="text" matInput [(ngModel)]="simulateForm.leaveRooms" name="leaveRooms" color="warn" placeholder="输入房间，已逗号分隔">
+        <button type="button" mat-raised-button (click)="leaveRoom()" [disabled]="!simulateForm.leaveRooms" color="accent" matSuffix>离开房间</button>
+      </mat-input-container>
 
       <div class="text-center">
-        <button type="button" md-raised-button (click)="getClientInfo()" color="accent" mdSuffix>查看信息</button>&nbsp;&nbsp;
-        <button type="button" md-raised-button (click)="setClientInfo()" color="accent" mdSuffix>设置信息</button>
+        <button type="button" mat-raised-button (click)="getClientInfo()" color="accent" matSuffix>查看信息</button>&nbsp;&nbsp;
+        <button type="button" mat-raised-button (click)="setClientInfo()" color="accent" matSuffix>设置信息</button>
       </div>
 
-      <md-input-container>
-        <textarea mdInput rows="3" name="clientInfo" [(ngModel)]="simulateForm.clientInfo"></textarea>
-      </md-input-container>
+      <mat-input-container>
+        <textarea matInput rows="3" name="clientInfo" [(ngModel)]="simulateForm.clientInfo"></textarea>
+      </mat-input-container>
 
       <div class="pull-right">
-        <button type="button" md-raised-button color="warn" (click)="disconnect()">下线</button>
+        <button type="button" mat-raised-button color="warn" (click)="disconnect()">下线</button>
       </div>
     </div>
   </form>

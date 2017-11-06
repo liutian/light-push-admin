@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { ApiService } from 'app/util/api.service';
 import { DialogComponent } from 'app/util/dialog.component';
@@ -13,12 +13,12 @@ export class OverviewListComponent implements OnInit {
   list: [any];
   page: number;
 
-  constructor(private apiService: ApiService, private dialog: MdDialog) {
+  constructor(private apiService: ApiService, private dialog: MatDialog) {
     this.page = 1;
   }
 
   ngOnInit() {
-    this.apiService.reportList('size=50').then(d => {
+    this.apiService.reportList('size=10').then(d => {
       this.list = d;
     });
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { ApiService } from 'app/util/api.service';
 import { UserService } from 'app/util/user.service';
@@ -15,7 +15,7 @@ import { DialogNsComponent } from 'app/util/dialog-ns/dialog-ns.component';
 export class HomeComponent implements OnInit {
   constructor(private apiService: ApiService,
     public user: UserService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private router: Router) { }
 
   ngOnInit() {

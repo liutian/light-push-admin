@@ -16,7 +16,7 @@
       width: calc(100% - #{$padding-left});
       left: $padding-left;
 
-      md-icon{
+      mat-icon{
         margin-left: -$padding-left;
       }
     }

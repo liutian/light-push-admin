@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { ApiService } from 'app/util/api.service';
@@ -24,7 +24,7 @@ export class NsListComponent implements OnInit {
 
   constructor(private apiService: ApiService,
     private router: Router,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private user: UserService) {
   }
 
@@ -52,7 +52,7 @@ export class NsListComponent implements OnInit {
   }
 
   addNs() {
-    let dialogRef = this.dialog.open(DialogNsComponent, {
+    const dialogRef = this.dialog.open(DialogNsComponent, {
       data: {
         close: function (data) {
           dialogRef.close(data);
@@ -61,7 +61,9 @@ export class NsListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (!result) return;
+      if (!result) {
+        return;
+      }
       this.apiService.nsQueryList().then(v => {
         this.nsListAll = v;
         this.nsList = v;
@@ -70,7 +72,7 @@ export class NsListComponent implements OnInit {
   }
 
   updateNs(namespace) {
-    let dialogRef = this.dialog.open(DialogNsComponent, {
+    const dialogRef = this.dialog.open(DialogNsComponent, {
       data: {
         namespace,
         close: function (data) {
@@ -80,7 +82,9 @@ export class NsListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (!result) return;
+      if (!result) {
+        return;
+      }
 
       this.apiService.nsQueryList().then(v => {
         this.nsListAll = v;
@@ -96,8 +100,8 @@ export class NsListComponent implements OnInit {
     return false;
   }
 
-  delNs(namespace, index) {
-    let dialogRef = this.dialog.open(DialogComponent, {
+  clearNs(namespace, index) {
+    const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         des: '确定删除吗?',
         confirm: true
@@ -105,10 +109,55 @@ export class NsListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (!result) return;
-      this.apiService.delNamespace(namespace.key).then(v => {
+      if (!result) {
+        return;
+      }
+      this.apiService.clearNamespace(namespace.key).then(v => {
+        alert('操作成功');
+      });
+    });
+  }
+
+  flushNs(namespace, index) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        des: '确定删除包括命名空间本身在内的所有数据吗?',
+        confirm: true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+      this.apiService.flushNamespace(namespace.key).then(v => {
         this.nsList.splice(index, 1);
       });
     });
+  }
+
+  toggleOffline(namespace) {
+    this.apiService.saveNamespace({
+      key: namespace.key,
+      offline: namespace.offline === 'off' ? 'on' : 'off'
+    }).then(r => {
+      namespace.offline = namespace.offline === 'off' ? 'on' : 'off';
+    })
+  }
+
+  clearRealTimeData(namespace) {
+    this.apiService.clearRealTimeData({
+      namespace: namespace.key
+    }).then(r => {
+      alert('操作成功');
+    })
+  }
+
+  clearLegacyClient(namespace) {
+    this.apiService.clearLegacyClient({
+      namespace: namespace.key
+    }).then(r => {
+      alert('操作成功');
+    })
   }
 }

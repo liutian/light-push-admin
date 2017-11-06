@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 import { ApiService } from 'app/util/api.service';
 import { DialogComponent } from 'app/util/dialog.component';
@@ -16,9 +16,9 @@ export class DialogNsComponent implements OnInit {
   closeDialog: Function;
 
 
-  constructor( @Inject(MD_DIALOG_DATA) private data: any,
+  constructor( @Inject(MAT_DIALOG_DATA) private data: any,
     private apiService: ApiService,
-    private dialog: MdDialog) {
+    private dialog: MatDialog) {
     this.closeDialog = data.close;
     this.isNew = !data.namespace;
     if (this.isNew) {
@@ -32,7 +32,6 @@ export class DialogNsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.namespace.offline = this.namespace.offline == 'on';
   }
 
   addApns() {
@@ -44,22 +43,13 @@ export class DialogNsComponent implements OnInit {
   }
 
   saveNamespace() {
-    let data = Object.assign({}, this.namespace);
+    const data = Object.assign({}, this.namespace);
     if (this.isNew) {
       data.key = '/' + data.key;
     }
-    data.offline = data.offline ? 'on' : 'off';
     this.apiService.saveNamespace(data).then(v => {
       this.closeDialog(true);
     })
   }
 
-  clearDirtyClient() {
-    this.apiService.clearDirtyClient({ namespace: this.namespace.key }).then(v => {
-      let dialogRef = this.dialog.open(DialogComponent, { data: { des: '清除成功' } });
-      setTimeout(() => {
-        dialogRef.close();
-      }, 1000);
-    })
-  }
 }

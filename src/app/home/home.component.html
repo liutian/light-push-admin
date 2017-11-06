@@ -4,15 +4,15 @@
       <a>微企消息推送平台</a>
     </div>
     <div class="pull-right">
-      <button type="button" md-button [mdMenuTriggerFor]="appMenu">
+      <button type="button" mat-button [matMenuTriggerFor]="appMenu">
         {{user.name}}
-        <md-icon>person outline</md-icon>
+        <mat-icon>person outline</mat-icon>
       </button>
 
-      <md-menu #appMenu="mdMenu">
-        <button md-menu-item routerLink="/home/ns-list" *ngIf="user.role == 'admin'">命名空间列表</button>
-        <button md-menu-item (click)="logout()">退出</button>
-      </md-menu>
+      <mat-menu #appMenu="matMenu" xPosition="before">
+        <button mat-menu-item routerLink="/home/ns-list" *ngIf="user.role == 'admin'">命名空间列表</button>
+        <button mat-menu-item (click)="logout()">退出</button>
+      </mat-menu>
     </div>
   </div>
 </header>

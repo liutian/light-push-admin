@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { ApiService } from 'app/util/api.service';
 import { ChartOption } from './chart-option';
@@ -22,7 +22,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   private fetchTimeout: number;
 
   constructor(private apiService: ApiService,
-    private dialog: MdDialog) {
+    private dialog: MatDialog) {
     this.roomList = [];
     this.currChartType = 'line';
   }
@@ -39,8 +39,10 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
 
   toggleChartView(roomName?) {
     if (roomName) {
-      let room = this.roomList.find(v => v.name == roomName);
-      if (!room) return;
+      const room = this.roomList.find(v => v.name === roomName);
+      if (!room) {
+        return;
+      }
 
       this.chartOption = room.chartLineOption;
     } else {
@@ -53,8 +55,8 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
 
   toggleChartType(type) {
     this.currChartType = type;
-    let room = this.roomList.find(v => v.name == this.activeTab);
-    if (type == 'line') {
+    const room = this.roomList.find(v => v.name === this.activeTab);
+    if (type === 'line') {
       this.chartOption = room.chartLineOption;
     } else {
       this.chartOption = room.chartPieOption;
@@ -63,9 +65,11 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   }
 
   showAddRoom() {
-    let dialogRef = this.dialog.open(DialogInputComponent);
+    const dialogRef = this.dialog.open(DialogInputComponent);
     dialogRef.afterClosed().subscribe(result => {
-      if (result === -1 || result === undefined) return;
+      if (result === -1 || result === undefined) {
+        return;
+      }
 
       if (!result || !result.trim()) {
         alert('请填写房间名');
@@ -76,7 +80,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   }
 
   addRoom(roomName) {
-    let room = this.roomList.find(v => v.name == roomName);
+    let room = this.roomList.find(v => v.name === roomName);
 
     if (!room) {
       room = {
@@ -95,14 +99,14 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   }
 
   removeRoom(roomName) {
-    let index = this.roomList.findIndex(v => v.name == roomName);
+    const index = this.roomList.findIndex(v => v.name === roomName);
     this.roomList.splice(index, 1);
     this.currChartType = 'line';
-    if (index == 0 || this.roomList.length == 0) {
+    if (index === 0 || this.roomList.length === 0) {
       this.chartOption = this.chartOptionOverview;
       this.activeTab = '';
     } else {
-      let room = this.roomList[index] || this.roomList[index - 1]
+      const room = this.roomList[index] || this.roomList[index - 1]
       this.chartOption = room.chartLineOption;
       this.activeTab = room.name;
     }
@@ -111,15 +115,15 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
 
 
   fillOverviewOption(chartOption) {
-    let now = Date.now();
-    let userSeriesData = chartOption.series[0].data;
-    let roomSeriesData = chartOption.series[1].data;
-    let clientSeriesData = chartOption.series[2].data;
-    let xAxis = chartOption.xAxis.data;
+    const now = Date.now();
+    const userSeriesData = chartOption.series[0].data;
+    const roomSeriesData = chartOption.series[1].data;
+    const clientSeriesData = chartOption.series[2].data;
+    const xAxis = chartOption.xAxis.data;
 
 
     for (let i = 0; i < 100; i++) {
-      let time = new Date(now - 5000 * (i + 1));
+      const time = new Date(now - 5000 * (i + 1));
       xAxis.unshift(this.toTime(time));
       userSeriesData.unshift(null);
       roomSeriesData.unshift(null);
@@ -128,13 +132,13 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   }
 
   fillRoomLineOption(chartOption) {
-    let now = Date.now();
-    let userSeriesData = chartOption.series[0].data;
-    let clientSeriesData = chartOption.series[1].data;
-    let xAxis = chartOption.xAxis.data;
+    const now = Date.now();
+    const userSeriesData = chartOption.series[0].data;
+    const clientSeriesData = chartOption.series[1].data;
+    const xAxis = chartOption.xAxis.data;
 
     for (let i = 0; i < 100; i++) {
-      let time = new Date(now - 5000 * (i + 1));
+      const time = new Date(now - 5000 * (i + 1));
       xAxis.unshift(this.toTime(time));
       userSeriesData.unshift(null);
       clientSeriesData.unshift(null);
@@ -152,24 +156,28 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   }
 
   fetchRoomOnlineData() {
-    if (this.roomList.length == 0) return Promise.resolve();
+    if (this.roomList.length === 0) {
+      return Promise.resolve();
+    }
 
-    let firstRoomName = (this.roomList[0] || {}).name;
-    let roomNameListParams = this.roomList.map(v => 'room=' + v.name).join('&');
+    const firstRoomName = (this.roomList[0] || {}).name;
+    const roomNameListParams = this.roomList.map(v => 'room=' + v.name).join('&');
     return this.apiService.onlineReport(roomNameListParams).then(data => {
       if (!Array.isArray(data)) {
         data = [Object.assign(data, { name: firstRoomName })];
       }
 
       data.forEach(value => {
-        let room = this.roomList.find(v => v.name == value.name);
-        if (!room) return;
+        const room = this.roomList.find(v => v.name === value.name);
+        if (!room) {
+          return;
+        }
 
-        let now = new Date();
-        let limit = 1000;
-        let xAxisData = room.chartLineOption.xAxis.data;
-        let userSeriesData = room.chartLineOption.series[0].data;
-        let clientSeriesData = room.chartLineOption.series[1].data;
+        const now = new Date();
+        const limit = 1000;
+        const xAxisData = room.chartLineOption.xAxis.data;
+        const userSeriesData = room.chartLineOption.series[0].data;
+        const clientSeriesData = room.chartLineOption.series[1].data;
 
         if (xAxisData.length > limit) {
           xAxisData.shift();
@@ -186,11 +194,12 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
         }
         clientSeriesData.push(value.clientCount);
 
-        let webTotalCount = room.chartPieOption.series[0].data[0].value = value.totalClientCount - value.totalIOSClientCount - value.totalAndroidClientCount;
+        const webTotalCount = room.chartPieOption.series[0].data[0].value =
+          value.totalClientCount - value.totalIOSClientCount - value.totalAndroidClientCount;
         room.chartPieOption.series[0].data[1].value = value.totalIOSClientCount;
         room.chartPieOption.series[0].data[2].value = value.totalAndroidClientCount;
 
-        let webCount = room.chartPieOption.series[1].data[0].value = value.clientCount - value.androidClientCount - value.iosClientCount;
+        const webCount = room.chartPieOption.series[1].data[0].value = value.clientCount - value.androidClientCount - value.iosClientCount;
         room.chartPieOption.series[1].data[1].value = webTotalCount - webCount;
         room.chartPieOption.series[1].data[2].value = value.iosClientCount;
         room.chartPieOption.series[1].data[3].value = value.totalIOSClientCount;
@@ -202,12 +211,12 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
 
   fetchOverviewOnlineData() {
     return this.apiService.onlineReport().then(data => {
-      let now = new Date();
-      let limit = 1000;
-      let xAxisData = this.chartOptionOverview.xAxis.data;
-      let userSeriesData = this.chartOptionOverview.series[0].data;
-      let roomSeriesData = this.chartOptionOverview.series[1].data;
-      let clientSeriesData = this.chartOptionOverview.series[2].data;
+      const now = new Date();
+      const limit = 1000;
+      const xAxisData = this.chartOptionOverview.xAxis.data;
+      const userSeriesData = this.chartOptionOverview.series[0].data;
+      const roomSeriesData = this.chartOptionOverview.series[1].data;
+      const clientSeriesData = this.chartOptionOverview.series[2].data;
 
       if (xAxisData.length > limit) {
         xAxisData.shift();
@@ -242,6 +251,8 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.fetchTimeout && window.clearTimeout(this.fetchTimeout);
+    if (this.fetchTimeout) {
+      window.clearTimeout(this.fetchTimeout)
+    }
   }
 }

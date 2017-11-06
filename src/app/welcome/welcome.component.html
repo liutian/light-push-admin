@@ -1,20 +1,20 @@
 <form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center" #loginForm="ngForm">
   <div class="login">
-    <md-input-container class="username">
-      <md-icon mdPrefix>person</md-icon>
-      <input type="text" [(ngModel)]="username" mdInput name="username" required>
-      <md-error>必填</md-error>
-    </md-input-container>
+    <mat-form-field class="username">
+      <mat-icon matPrefix>person</mat-icon>
+      <input type="text" [(ngModel)]="username" matInput name="username" required>
+      <mat-error>必填</mat-error>
+    </mat-form-field>
 
-    <md-input-container class="password">
-      <md-icon mdPrefix>https</md-icon>
-      <input type="password" [(ngModel)]="password" mdInput name="password" required>
-      <md-error>必填</md-error>
-    </md-input-container>
+    <mat-form-field class="password">
+      <mat-icon matPrefix>https</mat-icon>
+      <input type="password" [(ngModel)]="password" matInput name="password" required>
+      <mat-error>必填</mat-error>
+    </mat-form-field>
 
     <div class="clearfix form-action">
-      <md-checkbox class="pull-left" [(ngModel)]="isAdmin" [checked]="isAdmin" name="isAdmin">管理员</md-checkbox>
-      <button type="submit" color="accent" class="pull-right" [disabled]="loginForm.form.invalid" md-raised-button>登录</button>
+      <mat-checkbox class="pull-left" [(ngModel)]="isAdmin" [checked]="isAdmin" name="isAdmin">管理员</mat-checkbox>
+      <button type="submit" color="accent" class="pull-right" [disabled]="loginForm.form.invalid" mat-raised-button>登录</button>
     </div>
   </div>
 </form>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { environment } from 'environments/environment';
 import { DialogComponent } from 'app/util/dialog.component';
@@ -10,7 +10,7 @@ import { DialogComponent } from 'app/util/dialog.component';
 @Injectable()
 export class CommonInterceptorService implements HttpInterceptor {
 
-  constructor(private router: Router, private dialog: MdDialog) { }
+  constructor(private router: Router, private dialog: MatDialog) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let _req = req.clone({ withCredentials: true });
@@ -29,7 +29,7 @@ export class CommonInterceptorService implements HttpInterceptor {
       }
 
       if (notice) {
-        let dialogRef = this.dialog.open(DialogComponent, {
+        const dialogRef = this.dialog.open(DialogComponent, {
           data: { des: notice }
         });
         setTimeout(() => {

@@ -1,20 +1,20 @@
 import { Component, Inject } from '@angular/core';
-import { MD_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   template: `
-    <h2 md-dialog-title *ngIf="des">{{des}}</h2>
-    <md-dialog-content>
-      <md-input-container>
-        <input mdInput placeholder="输入房间名" #roomRef>
-      </md-input-container>
-    </md-dialog-content>
-    <md-dialog-actions>
-      <button md-button [md-dialog-close]="-1" md-raised-button>取消</button>&nbsp;&nbsp;
-      <button md-button [md-dialog-close]="roomRef.value" md-raised-button color="accent">添加</button>
-    </md-dialog-actions>
+    <h2 mat-dialog-title *ngIf="des">{{des}}</h2>
+    <mat-dialog-content>
+      <mat-input-container>
+        <input matInput placeholder="输入房间名" #roomRef>
+      </mat-input-container>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="-1" mat-raised-button>取消</button>&nbsp;&nbsp;
+      <button mat-button [mat-dialog-close]="roomRef.value" mat-raised-button color="accent">添加</button>
+    </mat-dialog-actions>
   `
 })
 export class DialogInputComponent {
-  constructor( @Inject(MD_DIALOG_DATA) public des: String) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public des: String) { }
 }

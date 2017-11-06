@@ -21,8 +21,8 @@
       <td>{{item.sendDate|date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>{{item.leaveMessage == 'true' ? '是' : '否'}}</td>
       <td>{{item.apnsName ? item.apnsName : '-'}}</td>
-      <td mdTooltip="{{'android终端:' + item.ackAndroidCount + ' IOS终端:' + item.ackIOSCount + ' 当时在线在线终端:' + item.onlineClientCount}}"
-        mdTooltipPosition="above">{{item.ackCount}}</td>
+      <td matTooltip="{{'android终端:' + item.ackAndroidCount + ' IOS终端:' + item.ackIOSCount + ' 当时在线在线终端:' + item.onlineClientCount}}"
+        matTooltipPosition="above">{{item.ackCount}}</td>
     </tr>
   </tbody>
 </table>
