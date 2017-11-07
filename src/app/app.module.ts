@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {
-  MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatSnackBarModule,
-  MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, MatSlideToggleModule
+  MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
+  MatTooltipModule, MatDialogModule, MatSnackBarModule,
+  MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule,
+  MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -55,8 +57,10 @@ import { SocketService } from 'app/util/socket.service';
     FlexLayoutModule,
     BrowserModule,
     AppRoutingModule,
-    MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatSnackBarModule,
-    MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule, MatFormFieldModule, MatSlideToggleModule
+    MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
+    MatTooltipModule, MatDialogModule, MatSnackBarModule,
+    MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule,
+    MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule
   ],
   providers: [
     SocketService,

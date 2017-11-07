@@ -38,7 +38,7 @@
           <button mat-menu-item (click)="clearNs(item,i)" color="warn" [disabled]="item.offline === 'off'">清空数据</button>
           <button mat-menu-item (click)="flushNs(item,i)" color="warn" [disabled]="item.offline === 'off'">删除</button>
         </mat-menu>
-        <button mat-button [matMenuTriggerFor]="moreMenu" color="accent">更多</button>
+        <button mat-button [matMenuTriggerFor]="moreMenu" color="accent" *ngIf="item.key !== '/'">更多</button>
       </td>
     </tr>
   </tbody>

@@ -11,16 +11,13 @@ import { DialogComponent } from 'app/util/dialog.component';
 })
 export class OverviewListComponent implements OnInit {
   list: [any];
-  page: number;
+  pageSize = 10;
 
   constructor(private apiService: ApiService, private dialog: MatDialog) {
-    this.page = 1;
   }
 
   ngOnInit() {
-    this.apiService.reportList('size=10').then(d => {
-      this.list = d;
-    });
+    this.loadList();
   }
 
   showMorePushData(data) {
@@ -32,6 +29,12 @@ export class OverviewListComponent implements OnInit {
       jsonData = data;
     }
     this.dialog.open(DialogComponent, { data: { des: jsonData, pre: true } }).updateSize();
+  }
+
+  loadList() {
+    this.apiService.reportList(`size=${this.pageSize}`).then(d => {
+      this.list = d;
+    });
   }
 
 }
