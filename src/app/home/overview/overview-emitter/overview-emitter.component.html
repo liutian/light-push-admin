@@ -22,7 +22,8 @@
   </mat-input-container>
 
   <div style="text-align: right;">
-    <mat-slide-toggle [checked]="messageForm.leaveMessage" color="accent">离线保存</mat-slide-toggle>
+    <mat-slide-toggle [checked]="messageForm.lost" color="accent" name="lost" [(ngModel)]="messageForm.lost">放弃推送</mat-slide-toggle>
+    <mat-slide-toggle [checked]="messageForm.leaveMessage" [disabled]="messageForm.lost" color="accent" name="leaveMessage" [(ngModel)]="messageForm.leaveMessage">离线保存</mat-slide-toggle>
     <button type="submit" [disabled]="sendMessageForm.form.invalid" mat-raised-button color="accent">发送</button>
   </div>
 

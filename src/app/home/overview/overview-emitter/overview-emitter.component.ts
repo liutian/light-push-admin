@@ -15,7 +15,6 @@ import { DialogComponent } from 'app/util/dialog.component';
   styleUrls: ['./overview-emitter.component.scss']
 })
 export class OverviewEmitterComponent implements OnInit {
-  leaveMessage: boolean;
   messageForm: any;
   reportMessage: any;
   reportMessageId: any;
@@ -31,7 +30,6 @@ export class OverviewEmitterComponent implements OnInit {
     private apiService: ApiService,
     private snackBar: MatSnackBar,
     public socketService: SocketService) {
-    this.leaveMessage = true;
     this.messageForm = {
       pushData: '{}',
       leaveMessage: true
@@ -45,6 +43,10 @@ export class OverviewEmitterComponent implements OnInit {
 
   sendMessage() {
     const data = Object.assign({}, this.messageForm);
+    if (data.lost) {
+      data.extra = 'lost';
+      data.lost = undefined;
+    }
     data.pushData = JSON.parse(this.messageForm.pushData);
     this.apiService.push(data).then(res => {
       this.snackBar.open(`消息推送成功 id: ${res.id}`, null, { duration: 3000 });
