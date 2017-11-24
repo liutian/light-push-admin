@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
@@ -14,13 +14,27 @@ import { DialogComponent } from 'app/util/dialog.component';
   templateUrl: './ns-list.component.html',
   styleUrls: ['./ns-list.component.scss']
 })
-export class NsListComponent implements OnInit {
+export class NsListComponent implements OnInit, OnDestroy {
 
   nsList: any[];
   searchForm: any;
-  nsListAll: any[];
-  searchKeySubject = new BehaviorSubject<string>('');
-  searchNameSubject = new BehaviorSubject<string>('');
+  searchSubject = new BehaviorSubject<any>({});
+  stateList = [
+    { title: '全部', value: '' },
+    { title: '上线', value: 'off' },
+    { title: '下线', value: 'on' },
+  ];
+  formData = {
+    key: '',
+    name: '',
+    offline: '',
+    page: 1,
+    pageSize: 20
+  }
+  nsTotal = 0;
+  allNsOnline = {};
+  timeoutSearchAllOnline;
+
 
   constructor(private apiService: ApiService,
     private router: Router,
@@ -30,25 +44,10 @@ export class NsListComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.encodeAuth(this.user.key, this.user.password);
-    this.apiService.nsQueryList().then(v => {
-      this.nsListAll = v;
-      this.nsList = v;
+    this.searchSubject.debounceTime(1000).subscribe(params => {
+      this.searchNs(params);
     });
-    Observable.combineLatest(this.searchKeySubject, this.searchNameSubject).debounceTime(1000).distinctUntilChanged().subscribe(arr => {
-      this.nsList = this.nsListAll.filter(v => {
-        let match = true;
-
-        if (arr[0] && !v.key.includes(arr[0])) {
-          match = false;
-        }
-        if (arr[1] && !v.name.includes(arr[1])) {
-          match = false;
-        }
-
-        return match;
-      });
-
-    })
+    this.searchAllOnline();
   }
 
   addNs() {
@@ -64,10 +63,7 @@ export class NsListComponent implements OnInit {
       if (!result) {
         return;
       }
-      this.apiService.nsQueryList().then(v => {
-        this.nsListAll = v;
-        this.nsList = v;
-      });
+      this.searchNs();
     });
   }
 
@@ -86,14 +82,31 @@ export class NsListComponent implements OnInit {
         return;
       }
 
-      this.apiService.nsQueryList().then(v => {
-        this.nsListAll = v;
-        this.nsList = v;
-      });
+      this.searchNs();
     });
   }
 
-  nsEnter(ns) {
+  searchAllOnline() {
+    this.apiService.onlineReportAdmin().then((data) => {
+      this.allNsOnline = data;
+
+      this.timeoutSearchAllOnline = window.setTimeout(this.searchAllOnline.bind(this), 5000);
+    });
+  }
+
+  searchNs(pageObj?) {
+    const params = Object.assign({ online: true }, this.formData, pageObj);
+    if (pageObj && pageObj.pageSize) {
+      this.formData.pageSize = pageObj.pageSize;
+    }
+
+    this.apiService.nsQueryList(params).then(result => {
+      this.nsList = result.list;
+      this.nsTotal = result.total;
+    });
+  }
+
+  dashboard(ns) {
     this.user.save({ namespace: ns.key });
     this.apiService.encodeAuth(ns.key, ns.auth_passwd);
     this.router.navigate(['home']);
@@ -159,5 +172,9 @@ export class NsListComponent implements OnInit {
     }).then(r => {
       alert('操作成功');
     })
+  }
+
+  ngOnDestroy() {
+    window.clearTimeout(this.timeoutSearchAllOnline);
   }
 }

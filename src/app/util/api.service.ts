@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestMethod } from '@angular/http';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Base64 } from 'js-base64';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
@@ -50,8 +50,16 @@ export class ApiService {
     return this.authHttp('/api/auth/report/online' + query);
   }
 
-  nsQueryList() {
-    return this.authHttp('/api/admin/namespace/list');
+  onlineReportAdmin(params?) {
+    const query = params ? '?' + params : '';
+
+    return this.authHttp('/api/admin/report/online' + query);
+  }
+
+  nsQueryList(params?) {
+    params = Object.keys(params || {}).map(k => `${k}=${params[k]}`).join('&');
+    const query = params ? '?' + params : '';
+    return this.authHttp('/api/admin/namespace/list' + query);
   }
 
   push(data) {

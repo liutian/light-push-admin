@@ -5,7 +5,7 @@ import {
   MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
   MatTooltipModule, MatDialogModule, MatSnackBarModule,
   MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule,
-  MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule
+  MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule, MatPaginatorIntl
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -75,5 +75,9 @@ import { SocketService } from 'app/util/socket.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
+  constructor(private paginator: MatPaginatorIntl) {
+    paginator.itemsPerPageLabel = '每页条数';
+    paginator.nextPageLabel = '下一页';
+    paginator.previousPageLabel = '上一页';
+  }
 }

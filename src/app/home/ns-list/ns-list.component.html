@@ -1,33 +1,48 @@
 <form class="ns-form">
-  <a mat-raised-button color="accent" (click)="addNs()">新增命名空间</a> &nbsp;&nbsp;&nbsp;&nbsp;
   <mat-input-container>
-    <input matInput type="text" placeholder="命名空间" (keyup)="searchKeySubject.next(searchKey.value)" #searchKey>
+    <input matInput type="text" placeholder="命名空间" (ngModelChange)="searchSubject.next({key: $event})" name="key" [(ngModel)]="formData.key">
   </mat-input-container>
 
   <mat-input-container>
-    <input matInput type="text" placeholder="名称" (keyup)="searchNameSubject.next(searchName.value)" #searchName>
+    <input matInput type="text" placeholder="名称" (ngModelChange)="searchSubject.next({name: $event})" name="name" [(ngModel)]="formData.name">
   </mat-input-container>
 
+  <mat-input-container>
+    <mat-select placeholder="服务状态" name="offline" [(ngModel)]="formData.offline" (change)="searchSubject.next()">
+      <mat-option *ngFor="let state of stateList" [value]="state.value">{{state.title}}</mat-option>
+    </mat-select>
+  </mat-input-container>
+  <a mat-raised-button color="accent" (click)="searchSubject.next()">搜索</a>
+
+
+  <a mat-raised-button class="pull-right" color="accent" (click)="addNs()">新增命名空间</a>
 </form>
 
 <table class="table">
   <thead>
     <tr>
+      <th colspan="6">
+        在线统计：{{allNsOnline.clientCount}} 个终端 {{allNsOnline.userCount}} 个用户 {{allNsOnline.roomCount}} 个房间
+      </th>
+    </tr>
+    <tr>
       <th>命名空间</th>
       <th>名称</th>
-      <th>密码</th>
-      <th>更新日期</th>
+      <th>在线统计</th>
+      <th>上线状态</th>
+      <th>修改日期</th>
       <th>操作</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of nsList;let i = index">
-      <td>{{item.key}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.auth_passwd}}</td>
+      <td style="width: 300px;">{{item.key}}</td>
+      <td style="width: 300px;">{{item.name}}</td>
+      <td matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}" matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
+      <td>{{item.offline === 'off' ? '是' : '否'}}</td>
       <td>{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>
-        <button mat-button color="accent" (click)="nsEnter(item)">
+        <button mat-button color="accent" (click)="dashboard(item)" *ngIf="item.key !== '/'">
           进入
         </button>
         <button mat-button (click)="updateNs(item)" color="accent">编辑</button>
@@ -43,3 +58,10 @@
     </tr>
   </tbody>
 </table>
+
+<div class="no-result" *ngIf="nsList && !nsList.length">
+  暂无数据
+</div>
+
+<mat-paginator [length]="nsTotal" (page)="searchSubject.next({page: $event.pageIndex + 1,pageSize: $event.pageSize})" [pageIndex]="formData.page - 1"
+  [pageSize]="formData.pageSize" [pageSizeOptions]="[5,10,20,30,100]"></mat-paginator>
