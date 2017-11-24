@@ -23,6 +23,7 @@ export class OverviewEmitterComponent implements OnInit {
   simulateForm: any = {};
   messageList = [];
   pushMessageSubscription: Subscription;
+  roomSet = new Set();
 
   constructor(
     private dialog: MatDialog,
@@ -104,6 +105,9 @@ export class OverviewEmitterComponent implements OnInit {
   }
 
   joinRoom() {
+    this.simulateForm.joinRooms.split(',').forEach(r => {
+      this.roomSet.add(r);
+    });
     this.socketService.joinRoom(this.simulateForm.joinRooms.split(','), (res) => {
       if (res.status !== 200) {
         const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
@@ -115,6 +119,9 @@ export class OverviewEmitterComponent implements OnInit {
   }
 
   leaveRoom() {
+    this.simulateForm.leaveRooms.split(',').forEach(r => {
+      this.roomSet.delete(r);
+    });
     this.socketService.leaveRoom(this.simulateForm.leaveRooms.split(','), (res) => {
       if (res.status !== 200) {
         const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
@@ -132,14 +139,27 @@ export class OverviewEmitterComponent implements OnInit {
   }
 
   setClientInfo() {
-    this.socketService.setInfo(JSON.parse(this.simulateForm.clientInfo), (res) => {
-      if (res.status !== 200) {
-        const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
-        setTimeout(() => {
-          dialogRef.close();
-        }, 1000);
-      }
-    });
+    let clientInfo;
+
+    try {
+      clientInfo = JSON.parse(this.simulateForm.clientInfo);
+
+      this.socketService.setInfo(JSON.parse(this.simulateForm.clientInfo), (res) => {
+        if (res.status !== 200) {
+          const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
+          setTimeout(() => {
+            dialogRef.close();
+          }, 1000);
+        }
+      });
+    } catch (e) {
+      const dialogRef = this.dialog.open(DialogComponent, { data: { des: '数据格式有误' } });
+      setTimeout(() => {
+        dialogRef.close();
+      }, 1000);
+    }
+
+
   }
 
 }

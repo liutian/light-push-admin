@@ -52,3 +52,19 @@ textarea{
   }
 
 }
+
+.room-list{
+  margin: 10px 0;
+
+  .title{
+
+  }
+
+  .label{
+    display: inline-block;
+    padding:  0 5px;
+    background-color: #ddd;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+}

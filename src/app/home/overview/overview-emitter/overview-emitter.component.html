@@ -22,7 +22,7 @@
   </mat-input-container>
 
   <div style="text-align: right;">
-    <mat-slide-toggle [checked]="messageForm.lost" color="accent" name="lost" [(ngModel)]="messageForm.lost">放弃推送</mat-slide-toggle>
+    <mat-slide-toggle [checked]="messageForm.lost" color="accent" name="lost" [(ngModel)]="messageForm.lost">模拟数据丢失</mat-slide-toggle>
     <mat-slide-toggle [checked]="messageForm.leaveMessage" [disabled]="messageForm.lost" color="accent" name="leaveMessage" [(ngModel)]="messageForm.leaveMessage">离线保存</mat-slide-toggle>
     <button type="submit" [disabled]="sendMessageForm.form.invalid" mat-raised-button color="accent">发送</button>
   </div>
@@ -80,6 +80,11 @@
         <div *ngFor="let item of messageList" class="message" (click)="showMessage(item)">{{item | json}}</div>
       </section>
 
+      <div class="room-list">
+        <div class="title">已加入的房间列表</div>
+        <div class="label" *ngFor="let room of roomSet">{{room}}</div>
+      </div>
+
       <mat-input-container>
         <input type="text" matInput [(ngModel)]="simulateForm.joinRooms" name="joinRooms" color="warn" placeholder="输入房间，已逗号分隔">
         <button type="button" mat-raised-button (click)="joinRoom()" [disabled]="!simulateForm.joinRooms" color="accent" matSuffix>加入房间</button>
@@ -90,9 +95,9 @@
         <button type="button" mat-raised-button (click)="leaveRoom()" [disabled]="!simulateForm.leaveRooms" color="accent" matSuffix>离开房间</button>
       </mat-input-container>
 
-      <div class="text-center">
-        <button type="button" mat-raised-button (click)="getClientInfo()" color="accent" matSuffix>查看信息</button>&nbsp;&nbsp;
-        <button type="button" mat-raised-button (click)="setClientInfo()" color="accent" matSuffix>设置信息</button>
+      <div>
+        输入设备信息：
+        <a class="pull-right underline" (click)="getClientInfo()">查看信息</a>&nbsp;&nbsp;
       </div>
 
       <mat-input-container>
@@ -100,6 +105,7 @@
       </mat-input-container>
 
       <div class="pull-right">
+        <button type="button" mat-raised-button (click)="setClientInfo()" color="accent" matSuffix>设置信息</button>&nbsp;&nbsp;
         <button type="button" mat-raised-button color="warn" (click)="disconnect()">下线</button>
       </div>
     </div>

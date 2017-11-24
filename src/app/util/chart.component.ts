@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-let scriptPath = 'assets/lib/echart/';
+const scriptPath = 'assets/lib/echart/';
 
 @Component({
   selector: 'p-chart',
   template: ''
 })
 export class ChartComponent implements OnInit, OnChanges {
-  @Input() chartWidth: number = 600;
-  @Input() chartHeight: number = 370;
+  @Input() chartWidth = 700;
+  @Input() chartHeight = 370;
   @Input() optionObservable: Observable<any>;
   private chart: any;
   private chartOption: any;
@@ -29,7 +29,9 @@ export class ChartComponent implements OnInit, OnChanges {
     if (this.optionObservable) {
       this.optionObservable.subscribe(data => {
         this.chartOption = data.option;
-        if (!this.chart) return;
+        if (!this.chart) {
+          return;
+        }
 
         this.chart.hideLoading();
         this.chart.setOption(data.option, { notMerge: data.clear });
@@ -40,7 +42,7 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   init() {
-    let ele = this.eleRef.nativeElement;
+    const ele = this.eleRef.nativeElement;
     ele.style.width = this.chartWidth + 'px';
     ele.style.height = this.chartHeight + 'px';
 
