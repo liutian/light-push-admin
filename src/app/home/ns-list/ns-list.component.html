@@ -8,11 +8,11 @@
   </mat-input-container>
 
   <mat-input-container>
-    <mat-select placeholder="服务状态" name="offline" [(ngModel)]="formData.offline" (change)="searchSubject.next()">
+    <mat-select placeholder="服务状态" name="offline" [(ngModel)]="formData.offline" (change)="searchSubject.next({})">
       <mat-option *ngFor="let state of stateList" [value]="state.value">{{state.title}}</mat-option>
     </mat-select>
   </mat-input-container>
-  <a mat-raised-button color="accent" (click)="searchSubject.next()">搜索</a>
+  <a mat-raised-button color="accent" (click)="searchSubject.next({})">搜索</a>
 
 
   <a mat-raised-button class="pull-right" color="accent" (click)="addNs()">新增命名空间</a>

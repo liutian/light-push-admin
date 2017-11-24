@@ -31,7 +31,7 @@ export class NsListComponent implements OnInit, OnDestroy {
     pageSize: 20
   }
   nsTotal = 0;
-  allNsOnline = {};
+  allNsOnline: any = {};
   timeoutSearchAllOnline;
 
 
