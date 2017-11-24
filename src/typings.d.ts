@@ -8,6 +8,7 @@ interface Window {
   LazyLoad: any;
   echarts: any;
   io: any;
+  ClipboardL: any;
 }
 
 interface String {

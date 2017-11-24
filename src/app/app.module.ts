@@ -28,6 +28,7 @@ import { UserService } from './util/user.service';
 import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
 import { CommonInterceptorService } from 'app/util/common-interceptor.service';
 import { SocketService } from 'app/util/socket.service';
+import { CopyDirective } from './util/copy.directive';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -43,7 +44,8 @@ import { SocketService } from 'app/util/socket.service';
     DialogInputComponent,
     OverviewEmitterComponent,
     OverviewListComponent,
-    DialogNsComponent
+    DialogNsComponent,
+    CopyDirective
   ],
   entryComponents: [
     DialogComponent,

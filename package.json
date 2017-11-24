@@ -49,6 +49,7 @@
     "@angular/platform-browser-dynamic": "4.4.3",
     "@angular/router": "4.4.3",
     "@types/js-base64": "2.1.5",
+    "clipboard": "1.7.1",
     "core-js": "2.5.1",
     "rxjs": "5.4.3",
     "zone.js": "0.8.17"

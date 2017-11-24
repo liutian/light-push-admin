@@ -17,7 +17,6 @@ import { DialogComponent } from 'app/util/dialog.component';
 export class NsListComponent implements OnInit, OnDestroy {
 
   nsList: any[];
-  searchForm: any;
   searchSubject = new BehaviorSubject<any>({});
   stateList = [
     { title: '全部', value: '' },

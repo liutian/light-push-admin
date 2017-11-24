@@ -1,6 +1,11 @@
 <form (ngSubmit)="saveNamespace()" #nsForm="ngForm">
 
-  <h2 mat-dialog-title>{{isNew ? '新增命名空间' : '编辑命名空间'}}</h2>
+  <h2 mat-dialog-title>
+    {{isNew ? '新增命名空间' : '编辑命名空间'}}
+    <a class="title-key" matTooltip="点击复制密码到剪贴板" pCopy [copyText]="namespace.auth_passwd" matTooltipPosition="above">
+      <mat-icon>vpn_key</mat-icon>
+    </a>
+  </h2>
   <mat-dialog-content>
     <mat-input-container>
       <input matInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required [readonly]="!isNew" [disabled]="!isNew">

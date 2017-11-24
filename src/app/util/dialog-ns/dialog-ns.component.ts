@@ -16,7 +16,8 @@ export class DialogNsComponent implements OnInit {
   closeDialog: Function;
 
 
-  constructor( @Inject(MAT_DIALOG_DATA) private data: any,
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
     private apiService: ApiService,
     private dialog: MatDialog) {
     this.closeDialog = data.close;

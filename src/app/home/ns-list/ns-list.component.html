@@ -45,7 +45,7 @@
         <button mat-button color="accent" (click)="dashboard(item)" *ngIf="item.key !== '/'">
           进入
         </button>
-        <button mat-button (click)="updateNs(item)" color="accent">编辑</button>
+        <button mat-button (click)="updateNs(item)" color="accent">修改</button>
         <mat-menu #moreMenu="matMenu">
           <button mat-menu-item (click)="toggleOffline(item)" color="accent">{{item.offline === 'off' ? '服务下线':'服务上线'}}</button>
           <button mat-menu-item (click)="clearRealTimeData(item,i)" color="warn" [disabled]="item.offline === 'off'">清空实时数据</button>
