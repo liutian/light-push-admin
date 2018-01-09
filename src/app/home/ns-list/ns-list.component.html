@@ -29,7 +29,7 @@
       <th>命名空间</th>
       <th>名称</th>
       <th>在线统计</th>
-      <th>上线状态</th>
+      <th>上线/离线</th>
       <th>修改日期</th>
       <th>操作</th>
     </tr>
@@ -39,7 +39,7 @@
       <td style="width: 300px;">{{item.key}}</td>
       <td style="width: 300px;">{{item.name}}</td>
       <td matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}" matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
-      <td>{{item.offline === 'off' ? '是' : '否'}}</td>
+      <td>{{item.offline === 'on' ? '离线' : '上线'}}</td>
       <td>{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>
         <button mat-button color="accent" (click)="dashboard(item)" *ngIf="item.key !== '/'">
