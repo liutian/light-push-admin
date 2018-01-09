@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { ApiService } from 'app/util/api.service';
 import { ChartOption } from './chart-option';
 import { DialogInputComponent } from 'app/util/dialog-input.component';
+import { OnlineReportDetailComponent } from 'app/util/online-report-detail/online-report-detail.component';
 
 @Component({
   selector: 'p-overview-chart',
@@ -35,6 +36,10 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
       this.toggleChartView();
       this.fetchData();
     });
+  }
+
+  showDetail() {
+    this.dialog.open(OnlineReportDetailComponent, { data: this.activeTab }).updateSize();
   }
 
   toggleChartView(roomName?) {

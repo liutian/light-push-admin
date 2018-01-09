@@ -29,6 +29,7 @@ import { DialogNsComponent } from './util/dialog-ns/dialog-ns.component';
 import { CommonInterceptorService } from 'app/util/common-interceptor.service';
 import { SocketService } from 'app/util/socket.service';
 import { CopyDirective } from './util/copy.directive';
+import { OnlineReportDetailComponent } from './util/online-report-detail/online-report-detail.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -45,9 +46,11 @@ import { CopyDirective } from './util/copy.directive';
     OverviewEmitterComponent,
     OverviewListComponent,
     DialogNsComponent,
-    CopyDirective
+    CopyDirective,
+    OnlineReportDetailComponent
   ],
   entryComponents: [
+    OnlineReportDetailComponent,
     DialogComponent,
     DialogInputComponent,
     DialogNsComponent

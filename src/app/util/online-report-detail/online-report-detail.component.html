@@ -1,0 +1,45 @@
+<div matDialogTitle>在线统计详细信息</div>
+
+<mat-dialog-content>
+  <table *ngIf="room" class="table">
+    <thead>
+      <tr>
+        <td>用户({{tableData.user?.length}})</td>
+        <td>客户端({{tableData.client?.length}})</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="label" *ngFor="let u of tableData.user" [matTooltip]="u" matTooltipPosition="above">{{u}}</div>
+        </td>
+        <td>
+          <div class="label" *ngFor="let c of tableData.client" [matTooltip]="c" matTooltipPosition="above">{{c}}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="!room" class="table">
+    <thead>
+      <tr>
+        <td>房间({{tableData.room?.length}})</td>
+        <td>用户({{tableData.user?.length}})</td>
+        <td>客户端({{tableData.client?.length}})</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="label" *ngFor="let r of tableData.room" [matTooltip]="r" matTooltipPosition="above">{{r}}</div>
+        </td>
+        <td>
+          <div class="label" *ngFor="let u of tableData.user" [matTooltip]="u" matTooltipPosition="above">{{u}}</div>
+        </td>
+        <td>
+          <div class="label" *ngFor="let c of tableData.client" [matTooltip]="c" matTooltipPosition="above">{{c}}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>

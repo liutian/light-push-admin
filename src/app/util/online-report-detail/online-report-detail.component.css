@@ -1,0 +1,27 @@
+table {
+  min-width: 700px;
+}
+
+thead td {
+  text-align: center;
+  line-height: 2.5;
+}
+
+td {
+  padding: 0 10px;
+  min-width: 150px;
+  max-width: 300px;
+}
+
+.label {
+  display: inline-block;
+  padding: 5px 8px;
+  margin: 5px 5px 5px 0;
+  background: #aaa;
+  line-height: 1;
+  max-width: 100px;
+  overflow: hidden;
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
