@@ -106,7 +106,7 @@ export class NsListComponent implements OnInit, OnDestroy {
   }
 
   dashboard(ns) {
-    this.user.save({ namespace: ns.key });
+    this.user.save({ namespace: ns.key, nsName: ns.name });
     this.apiService.encodeAuth(ns.key, ns.auth_passwd);
     this.router.navigate(['home']);
     return false;

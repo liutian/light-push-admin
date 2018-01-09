@@ -9,34 +9,47 @@ export class UserService {
   key: string;
   password: string;
   namespace: string;
+  nsName: string;
 
   constructor() {
-    let str = window.localStorage.getItem(this.itemKey);
-    if (!str) return;
+    const str = window.localStorage.getItem(this.itemKey);
+    if (!str) {
+      return;
+    }
 
     try {
-      let userInfo = JSON.parse(str);
+      const userInfo = JSON.parse(str);
       this.name = userInfo.name;
       this.role = userInfo.role;
       this.key = userInfo.key;
       this.password = userInfo.password;
       this.namespace = userInfo.namespace;
+      this.nsName = userInfo.nsName;
     } catch (e) { }
   }
 
   save(data) {
-    let d: any = {
-      name: this.name,
-      role: this.role,
-      key: this.key,
-      password: this.password,
-      namespace: this.namespace
-    };
-    data.name !== undefined && (d.name = this.name = data.name);
-    data.key !== undefined && (d.key = this.key = data.key);
-    data.password !== undefined && (d.password = this.password = data.password);
-    data.role !== undefined && (d.role = this.role = data.role);
-    data.namespace !== undefined && (d.namespace = this.namespace = data.namespace);
-    window.localStorage.setItem(this.itemKey, JSON.stringify(d));
+    if (data.name !== undefined) {
+      this.name = data.name
+    }
+    if (data.key !== undefined) {
+      this.key = data.key
+    }
+    if (data.password !== undefined) {
+      this.password = data.password
+    }
+    if (data.role !== undefined) {
+      this.role = data.role
+    }
+    if (data.namespace !== undefined) {
+      this.namespace = data.namespace
+    }
+    if (data.nsName !== undefined) {
+      this.nsName = data.nsName
+    }
+    if (data.name !== undefined) {
+      this.name = data.name
+    }
+    window.localStorage.setItem(this.itemKey, JSON.stringify(this));
   }
 }
