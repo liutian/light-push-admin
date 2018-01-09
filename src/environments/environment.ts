@@ -8,5 +8,6 @@ export const environment = {
   production: false,
   pushServer: 'http://127.0.0.1:21314',
   pushScirpt: 'http://127.0.0.1:21314',
-  pushOptionPath: '/socket.io/'
+  pushOptionPath: '/socket.io/',
+  copyRight: '上海微企信息技术股份有限公司'
 };
