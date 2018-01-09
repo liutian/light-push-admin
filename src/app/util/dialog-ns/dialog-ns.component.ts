@@ -46,7 +46,7 @@ export class DialogNsComponent implements OnInit {
   saveNamespace() {
     const data = Object.assign({}, this.namespace);
     if (this.isNew) {
-      data.key = '/' + data.key;
+      data.key = '/' + data.key.trim().replace(/^\/*/, '');
     }
     this.apiService.saveNamespace(data).then(v => {
       this.closeDialog(true);

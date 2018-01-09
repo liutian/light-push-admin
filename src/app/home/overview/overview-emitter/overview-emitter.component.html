@@ -12,13 +12,17 @@
   </mat-input-container>
 
   <mat-input-container>
-    <textarea matInput rows="7" [(ngModel)]="messageForm.pushData" name="pushData" placeholder="输入推送数据" required></textarea>
+    <textarea matInput rows="7" [(ngModel)]="messageForm.pushData" name="pushData" placeholder="输入推送数据(JSON字符串)" required></textarea>
     <mat-error>必填</mat-error>
     <mat-hint>必须是JSON字符串</mat-hint>
   </mat-input-container>
 
   <mat-input-container>
     <input type="text" matInput [(ngModel)]="messageForm.apnsName" name="apnsName" placeholder="输入apnsName">
+  </mat-input-container>
+
+  <mat-input-container>
+    <input type="number" matInput [(ngModel)]="messageForm.expire" name="apnsName" placeholder="输入失效时间(单位小时)">
   </mat-input-container>
 
   <div style="text-align: right;">

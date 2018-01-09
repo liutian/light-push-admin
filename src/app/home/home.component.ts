@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { ApiService } from 'app/util/api.service';
 import { UserService } from 'app/util/user.service';
 import { DialogNsComponent } from 'app/util/dialog-ns/dialog-ns.component';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'p-home',
@@ -13,6 +14,7 @@ import { DialogNsComponent } from 'app/util/dialog-ns/dialog-ns.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  env = environment;
   constructor(private apiService: ApiService,
     public user: UserService,
     private dialog: MatDialog,

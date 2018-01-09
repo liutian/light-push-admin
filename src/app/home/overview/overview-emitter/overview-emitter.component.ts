@@ -48,7 +48,12 @@ export class OverviewEmitterComponent implements OnInit {
       data.extra = 'lost';
       data.lost = undefined;
     }
-    data.pushData = JSON.parse(this.messageForm.pushData);
+    try {
+      data.pushData = JSON.parse(this.messageForm.pushData);
+    }catch (e) {
+      this.snackBar.open('必须是JSON字符串', null , { duration: 3000 });
+      return;
+    }
     this.apiService.push(data).then(res => {
       this.snackBar.open(`消息推送成功 id: ${res.id}`, null, { duration: 3000 });
       this.sendId = res.id;
