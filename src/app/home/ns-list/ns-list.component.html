@@ -21,29 +21,29 @@
 <table class="table">
   <thead>
     <tr>
-      <th colspan="6">
+      <th colspan="7">
         在线统计：{{allNsOnline.clientCount}} 个终端 {{allNsOnline.userCount}} 个用户 {{allNsOnline.roomCount}} 个房间
       </th>
     </tr>
     <tr>
       <th>命名空间</th>
       <th>名称</th>
-      <th>累计客户端</th>
-      <th>在线统计</th>
-      <th>上线/离线</th>
-      <th>修改日期</th>
-      <th>操作</th>
+      <th>&nbsp;累计客户端&nbsp;</th>
+      <th>&nbsp;在线统计&nbsp;</th>
+      <th>&nbsp;上线/离线&nbsp;</th>
+      <th class="text-center">修改日期</th>
+      <th class="text-center">操作</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of nsList;let i = index">
-      <td style="width: 300px;">{{item.key}}</td>
-      <td style="width: 300px;">{{item.name}}</td>
-      <td>{{item.totalClientCount}}</td>
-      <td matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}" matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
-      <td>{{item.offline === 'on' ? '离线' : '上线'}}</td>
-      <td>{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-      <td>
+      <td style="width: 280px;">{{item.key}}</td>
+      <td style="width: 280px;">{{item.name}}</td>
+      <td class="text-center">{{item.totalClientCount}}</td>
+      <td class="text-center" matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}" matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
+      <td class="text-center">{{item.offline === 'on' ? '离线' : '上线'}}</td>
+      <td >{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td >
         <button mat-button color="accent" (click)="dashboard(item)" *ngIf="item.key !== '/'">
           进入
         </button>

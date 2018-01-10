@@ -56,8 +56,8 @@ export class ChartOption {
       toolbox: {
         show: true,
         feature: {
-          dataView: { readOnly: false },
-          restore: {},
+          // dataView: { readOnly: false },
+          // restore: {},
           saveAsImage: {}
         },
         top: 15

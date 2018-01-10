@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { ApiService } from 'app/util/api.service';
@@ -35,10 +35,12 @@ export class NsListComponent implements OnInit, OnDestroy {
   timeoutSearchAllOnline;
 
 
-  constructor(private apiService: ApiService,
+  constructor(
+    private apiService: ApiService,
     private router: Router,
     private dialog: MatDialog,
-    private user: UserService) {
+    private user: UserService,
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -125,7 +127,7 @@ export class NsListComponent implements OnInit, OnDestroy {
         return;
       }
       this.apiService.clearNamespace(namespace.key).then(v => {
-        alert('操作成功');
+        this.snackBar.open('操作成功', null , { duration: 3000 });
       });
     });
   }
@@ -161,7 +163,7 @@ export class NsListComponent implements OnInit, OnDestroy {
     this.apiService.clearRealTimeData({
       namespace: namespace.key
     }).then(r => {
-      alert('操作成功');
+      this.snackBar.open('操作成功', null , { duration: 3000 });
     })
   }
 
@@ -169,7 +171,7 @@ export class NsListComponent implements OnInit, OnDestroy {
     this.apiService.clearLegacyClient({
       namespace: namespace.key
     }).then(r => {
-      alert('操作成功');
+      this.snackBar.open('操作成功', null , { duration: 3000 });
     })
   }
 

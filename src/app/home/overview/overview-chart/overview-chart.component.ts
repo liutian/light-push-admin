@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { ApiService } from 'app/util/api.service';
 import { ChartOption } from './chart-option';
@@ -23,8 +23,10 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   private chartOption: any;
   private fetchTimeout: number;
 
-  constructor(private apiService: ApiService,
-    private dialog: MatDialog) {
+  constructor(
+    private apiService: ApiService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
     this.roomList = [];
     this.currChartType = 'line';
   }
@@ -78,7 +80,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
       }
 
       if (!result || !result.trim()) {
-        alert('请填写房间名');
+        this.snackBar.open('请填写房间名', null , { duration: 3000 });
       } else {
         this.addRoom(result.trim());
       }
