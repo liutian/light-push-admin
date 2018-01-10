@@ -31,17 +31,17 @@
       <th>&nbsp;累计客户端&nbsp;</th>
       <th>&nbsp;在线统计&nbsp;</th>
       <th>&nbsp;上线/离线&nbsp;</th>
-      <th class="text-center">修改日期</th>
-      <th class="text-center">操作</th>
+      <th class="center">修改日期</th>
+      <th class="center">操作</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of nsList;let i = index">
       <td style="width: 280px;">{{item.key}}</td>
       <td style="width: 280px;">{{item.name}}</td>
-      <td class="text-center">{{item.totalClientCount}}</td>
-      <td class="text-center" matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}" matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
-      <td class="text-center">{{item.offline === 'on' ? '离线' : '上线'}}</td>
+      <td class="center">{{item.totalClientCount}}</td>
+      <td class="center" matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}" matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
+      <td class="center">{{item.offline === 'on' ? '离线' : '上线'}}</td>
       <td >{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td >
         <button mat-button color="accent" (click)="dashboard(item)" *ngIf="item.key !== '/'">
