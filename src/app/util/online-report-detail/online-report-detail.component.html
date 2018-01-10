@@ -4,8 +4,8 @@
   <table *ngIf="room" class="table">
     <thead>
       <tr>
-        <td>用户({{tableData.user?.length}})</td>
-        <td>客户端({{tableData.client?.length}})</td>
+        <th>用户({{tableData.user?.length}})</th>
+        <th>客户端({{tableData.client?.length}})</th>
       </tr>
     </thead>
     <tbody>
@@ -23,9 +23,9 @@
   <table *ngIf="!room" class="table">
     <thead>
       <tr>
-        <td>房间({{tableData.room?.length}})</td>
-        <td>用户({{tableData.user?.length}})</td>
-        <td>客户端({{tableData.client?.length}})</td>
+        <th>房间({{tableData.room?.length}})</th>
+        <th>用户({{tableData.user?.length}})</th>
+        <th>客户端({{tableData.client?.length}})</th>
       </tr>
     </thead>
     <tbody>

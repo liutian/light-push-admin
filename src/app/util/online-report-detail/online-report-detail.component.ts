@@ -13,7 +13,7 @@ export class OnlineReportDetailComponent implements OnInit {
   tableData = {};
 
   constructor(
-    @Optional() @Inject(MAT_DIALOG_DATA) private room: String,
+    @Optional() @Inject(MAT_DIALOG_DATA) public room: String,
     private apiService: ApiService) { }
 
   ngOnInit() {

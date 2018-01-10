@@ -19,6 +19,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   roomList: any[];
   activeTab: string;
   currChartType: string;
+  totalClientCount: number;
   private chartOption: any;
   private fetchTimeout: number;
 
@@ -216,6 +217,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
 
   fetchOverviewOnlineData() {
     return this.apiService.onlineReport().then(data => {
+      this.totalClientCount = data.totalClientCount;
       const now = new Date();
       const limit = 1000;
       const xAxisData = this.chartOptionOverview.xAxis.data;
