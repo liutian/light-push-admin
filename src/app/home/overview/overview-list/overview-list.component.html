@@ -1,10 +1,17 @@
-<div class="text-right">
-  <mat-form-field>
-    <mat-select placeholder="选择查询范围" [(ngModel)]="pageSize" (change)="loadList()">
-      <mat-option *ngFor="let p of [10,50,100,200,300,400,500]" [value]="p">最新{{p}}条</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button type="button" mat-raised-button (click)="loadList()">刷新</button>
+<div class="clearfix">
+  <div class="pull-left">
+    <div class="mat-button">
+      当天总消息数：{{messageStat.currDateMessageCount}} &nbsp;|&nbsp; 当前小时总消息数：{{messageStat.currHourMessageCount}} &nbsp;|&nbsp; 当前分钟总消息数：{{messageStat.currMinuteMessageCount}}
+    </div>
+  </div>
+  <div class="pull-right">
+    <mat-form-field>
+      <mat-select placeholder="选择查询范围" [(ngModel)]="pageSize" (change)="loadList()">
+        <mat-option *ngFor="let p of [10,50,100,200,300,400,500]" [value]="p">最新{{p}}条</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button type="button" mat-raised-button (click)="loadList()">刷新</button>
+  </div>
 </div>
 <table class="table">
   <thead>

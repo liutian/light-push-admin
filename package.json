@@ -7,7 +7,7 @@
     "start": "ng serve --open ",
     "dev": "ng serve --open --hmr",
     "build-test": "ng build -prod --base-href /push-admin/ -e test",
-    "build": "ng build -prod --sourcemaps --base-href /push-admin/ --deploy-url https://ipush.weisk.com/push-admin",
+    "build": "ng build -prod --vendor-chunk --sourcemaps --base-href /push-admin/ --deploy-url https://ipush.weisk.com/push-admin",
     "build-docker": "ng build -prod -e dev",
     "test": "ng test",
     "lint": "ng lint",

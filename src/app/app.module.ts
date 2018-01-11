@@ -69,7 +69,7 @@ import { environment } from '../environments/environment';
     MatTooltipModule, MatDialogModule, MatSnackBarModule,
     MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule,
     MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     SocketService,

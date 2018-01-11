@@ -12,12 +12,14 @@ import { DialogComponent } from 'app/util/dialog.component';
 export class OverviewListComponent implements OnInit {
   list: [any];
   pageSize = 10;
+  messageStat = {};
 
   constructor(private apiService: ApiService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.loadList();
+    this.loadCurrentMessageStat();
   }
 
   showMorePushData(data) {
@@ -35,6 +37,13 @@ export class OverviewListComponent implements OnInit {
     this.apiService.reportList(`size=${this.pageSize}`).then(d => {
       this.list = d;
     });
+  }
+
+  loadCurrentMessageStat() {
+    this.apiService.currentMessageStat().then(data => {
+      this.messageStat = data;
+      setTimeout(this.loadCurrentMessageStat.bind(this), 5000);
+    })
   }
 
 }

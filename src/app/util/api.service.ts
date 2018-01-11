@@ -98,6 +98,10 @@ export class ApiService {
     return this.authHttp('/api/admin/namespace/flush' + key);
   }
 
+  currentMessageStat() {
+    return this.authHttp('/api/auth/namespace/current-message-stat');
+  }
+
   private authHttp(url: string, method?: RequestMethod, data?: any): Promise<any> {
     if (!this.auth) {
       if (!this.showErrorDialog) {

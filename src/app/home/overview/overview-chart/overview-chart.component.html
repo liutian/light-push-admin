@@ -1,7 +1,7 @@
 <nav mat-tab-nav-bar>
   <a mat-tab-link (click)="toggleChartView('')" [active]="!activeTab">总览</a>
 
-  <a mat-tab-link *ngFor="let room of roomList" (click)="toggleChartView(room.name)" [active]="activeTab === room.name">{{room.name | slice:-6}}</a>
+  <a mat-tab-link *ngFor="let room of roomList" (click)="toggleChartView(room.name)" matTooltip="{{room.name}}" [active]="activeTab === room.name">{{room.name | slice:-6}}</a>
 
   <a mat-tab-link (click)="showAddRoom()">
     +新增
