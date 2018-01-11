@@ -30,6 +30,9 @@ import { CommonInterceptorService } from 'app/util/common-interceptor.service';
 import { SocketService } from 'app/util/socket.service';
 import { CopyDirective } from './util/copy.directive';
 import { OnlineReportDetailComponent } from './util/online-report-detail/online-report-detail.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { environment } from '../environments/environment';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -65,7 +68,8 @@ import { OnlineReportDetailComponent } from './util/online-report-detail/online-
     MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
     MatTooltipModule, MatDialogModule, MatSnackBarModule,
     MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule,
-    MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule
+    MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     SocketService,
