@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Rx';
 import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
@@ -15,7 +15,7 @@ import { environment } from 'environments/environment';
 })
 export class HomeComponent implements OnInit {
   env = environment;
-  showNsName = false;
+  $showNsName = new Subject<boolean>();
 
   constructor(private apiService: ApiService,
     public user: UserService,
@@ -23,11 +23,6 @@ export class HomeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.router.events.subscribe(e => {
-      if (e instanceof NavigationEnd) {
-        this.showNsName = this.router.isActive('/home', false);
-      }
-    })
   }
 
   logout() {

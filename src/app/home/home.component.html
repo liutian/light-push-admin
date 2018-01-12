@@ -2,7 +2,7 @@
   <div class="layout-center clearfix">
     <div class="pull-left">
       <a>消息推送平台</a>
-      <span *ngIf="showNsName"> - {{user.nsName}}</span>
+      <span *ngIf="$showNsName | async"> - {{user.nsName}}</span>
     </div>
     <div class="pull-right">
       <button type="button" mat-button [matMenuTriggerFor]="appMenu">
