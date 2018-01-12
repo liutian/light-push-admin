@@ -9,6 +9,7 @@ interface Window {
   echarts: any;
   io: any;
   ClipboardL: any;
+  particlesJS: any;
 }
 
 interface String {

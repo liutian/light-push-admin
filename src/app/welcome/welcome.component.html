@@ -1,4 +1,4 @@
-<form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center" #loginForm="ngForm">
+<form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center" #loginForm="ngForm" style="background-image: url(assets/img/bg.jpg)">
   <div class="login">
     <mat-form-field class="username">
       <mat-icon matPrefix>person</mat-icon>
@@ -17,4 +17,5 @@
       <button type="submit" color="accent" class="pull-right" [disabled]="loginForm.form.invalid" mat-raised-button>登录</button>
     </div>
   </div>
+  <div id="particles"></div>
 </form>

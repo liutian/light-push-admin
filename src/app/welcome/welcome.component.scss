@@ -1,27 +1,44 @@
 @import 'var';
 
+
 :host > [fxLayout] {
   height: 100%;
-  background-color: $primary-color;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
 }
 
 .login{
-    padding: 40px;
-    width: 400px;
-    background-color: rgba(255, 255, 255,0.5);
+  margin-top: 20px;
+  padding: 40px;
+  width: 400px;
+  background-color: rgba(161,175,175,0.42);
+  z-index: 1;
 
-    $padding-left: 40px;
+  $padding-left: 40px;
 
-    .username,.password{
-      width: calc(100% - #{$padding-left});
-      left: $padding-left;
+  .username,.password{
+    width: calc(100% - #{$padding-left});
+    left: $padding-left;
 
-      mat-icon{
-        margin-left: -$padding-left;
-      }
-    }
-
-    .form-action{
-      margin-left: $padding-left;
+    mat-icon{
+      margin-left: -$padding-left;
     }
   }
+
+  .form-action{
+    margin-left: $padding-left;
+  }
+}
+
+#particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 1em);
+}
+
+:host /deep/ .mat-checkbox-frame{
+  border-color: #ddd;
+}

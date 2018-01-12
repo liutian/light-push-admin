@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { ApiService } from 'app/util/api.service';
 import { DialogComponent } from 'app/util/dialog.component';
 import { UserService } from 'app/util/user.service';
+import 'particles.js';
+import { option as particleOption } from 'app/util/particles';
 
 @Component({
   selector: 'p-welcome',
@@ -23,6 +25,7 @@ export class WelcomeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    window.particlesJS('particles', particleOption);
   }
 
   login() {
