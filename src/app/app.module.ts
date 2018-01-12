@@ -5,7 +5,7 @@ import {
   MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
   MatTooltipModule, MatDialogModule, MatSnackBarModule,
   MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule,
-  MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule, MatPaginatorIntl
+  MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule, MatPaginatorIntl, MatSnackBar
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -30,9 +30,10 @@ import { CommonInterceptorService } from 'app/util/common-interceptor.service';
 import { SocketService } from 'app/util/socket.service';
 import { CopyDirective } from './util/copy.directive';
 import { OnlineReportDetailComponent } from './util/online-report-detail/online-report-detail.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 
 import { environment } from '../environments/environment';
+import { UpdateAvailableEvent } from '@angular/service-worker/src/low_level';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -50,7 +51,7 @@ import { environment } from '../environments/environment';
     OverviewListComponent,
     DialogNsComponent,
     CopyDirective,
-    OnlineReportDetailComponent
+    OnlineReportDetailComponent,
   ],
   entryComponents: [
     OnlineReportDetailComponent,
@@ -69,7 +70,7 @@ import { environment } from '../environments/environment';
     MatTooltipModule, MatDialogModule, MatSnackBarModule,
     MatCardModule, MatInputModule, MatRadioModule, MatCheckboxModule,
     MatFormFieldModule, MatSlideToggleModule, MatPaginatorModule, MatSelectModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     SocketService,
@@ -84,9 +85,22 @@ import { environment } from '../environments/environment';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private paginator: MatPaginatorIntl) {
+  constructor(
+    private snackBar: MatSnackBar,
+    private swUpdate: SwUpdate,
+    private paginator: MatPaginatorIntl) {
+
     paginator.itemsPerPageLabel = '每页条数';
     paginator.nextPageLabel = '下一页';
     paginator.previousPageLabel = '上一页';
+
+    this.init();
+  }
+
+  init() {
+    this.swUpdate.available.subscribe((e: UpdateAvailableEvent) => {
+      console.log('available');
+      this.snackBar.open('发现新版本', null, { duration: 3000 });
+    });
   }
 }
