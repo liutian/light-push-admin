@@ -99,7 +99,6 @@ export class AppModule {
 
   init() {
     this.swUpdate.available.subscribe((e: UpdateAvailableEvent) => {
-      console.log('available');
       this.snackBar.open('发现新版本', null, { duration: 3000 });
     });
   }
