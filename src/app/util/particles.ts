@@ -1,20 +1,20 @@
 export const option = {
   'particles': {
     'number': {
-      'value': 50,
+      'value': 20,
       'density': {
         'enable': true,
-        'value_area': 1500
+        'value_area': 1000
       }
     },
     'color': {
-      'value': '#ffffff'
+      'value': '#fff'
     },
     'shape': {
       'type': 'circle',
       'stroke': {
-        'width': 0,
-        'color': '#000000'
+        'width': 1,
+        'color': '#555'
       },
       'polygon': {
         'nb_sides': 1
@@ -30,17 +30,17 @@ export const option = {
       'random': true,
       'anim': {
         'enable': true,
-        'speed': 1.2,
+        'speed': 0.5,
         'opacity_min': 0.1,
-        'sync': true
+        'sync': false
       }
     },
     'size': {
-      'value': 3,
+      'value': 2,
       'random': true,
       'anim': {
-        'enable': false,
-        'speed': 5,
+        'enable': true,
+        'speed': 1,
         'size_min': 0.1,
         'sync': false
       }
@@ -48,22 +48,22 @@ export const option = {
     'line_linked': {
       'enable': true,
       'distance': 300,
-      'color': '#ffffff',
-      'opacity': 0.4,
-      'width': 2
+      'color': '#999',
+      'opacity': 0.1,
+      'width': 1
     },
     'move': {
       'enable': true,
-      'speed': 5,
+      'speed': 1,
       'direction': 'none',
       'random': true,
       'straight': false,
       'out_mode': 'out',
-      'bounce': false,
+      'bounce': true,
       'attract': {
         'enable': false,
-        'rotateX': 600,
-        'rotateY': 1200
+        'rotateX': 200,
+        'rotateY': 200
       }
     }
   },
@@ -84,7 +84,7 @@ export const option = {
       'grab': {
         'distance': 300,
         'line_linked': {
-          'opacity': 0.5
+          'opacity': 1
         }
       },
       'bubble': {
