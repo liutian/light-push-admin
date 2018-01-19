@@ -5,7 +5,7 @@
 
 export const environment = {
   apiPath: '/push-logic',
-  production: false,
+  production: true,
   pushServer: '',
   pushScirpt: '/push',
   pushOptionPath: '/push/socket.io/',
