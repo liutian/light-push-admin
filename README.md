@@ -1,28 +1,35 @@
-# PushAdmin
+# LightPushAdmin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
+用ng5，material2写的一个后台监控和管理页面
 
-## Development server
+### 快速体验
+- docker run -id -p 443:443 --name push-demo liuss/push:<version> /mnt/data/start.sh 需要将 version 改成对应的版本号
+- 访问管理页面: https://127.0.0.1 登录名 demo 密码 123456 勾选管理员选项
+- [在线体验](https://39.104.57.212:55555/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### 调用方式
+```
+// demo: 命名空间；uuid: 客户端唯一标示；userid: 客户端所属的用户ID
+let socket = io.connect('https://127.0.0.1:55555/demo?uuid=' + uuid + '&userid=' + userid, {
+  path: '/push/socket.io/'
+});
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+socket.on('connect', function () {
+  // 客户端主动加入房间
+  socket.emit('joinRoom', ['room1'], function (result) {
+    console.log('joinRoom:' + JSON.stringify(result));
+  });
+  
+  // 接收服务器端的推送消息
+  socket.on('push', function (data) {
+    console.log('push:' + JSON.stringify(data));
+    // 消息确认回执
+    socket.emit('ackPush', { id: data.id });
+  });
+  
+  // 客户端主动离开房间
+  socket.emit('leaveRoom', ['room2'], function (result) {
+    console.log('leaveRoom:' + JSON.stringify(result));
+  });
+});
+```
