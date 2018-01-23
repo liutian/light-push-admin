@@ -1,6 +1,6 @@
 # LightPushAdmin
 
-用ng5，material2写的一个后台监控和管理页面
+用ng5，material2写的一个后台监控和管理界面
 
 ### 快速体验
 - docker run -id -p 443:443 --name push-demo liuss/push:<version> /mnt/data/start.sh 需要将 version 改成对应的版本号
