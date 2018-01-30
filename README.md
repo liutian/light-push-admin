@@ -2,8 +2,8 @@
 
 用ng5，material2写的推送服务控制台界面
 
-<img src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-1.mp4" />
-<img src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-2.mp4" />
+<img src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-1.gif" />
+<img src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-2.gif" />
 
 ### 快速体验
 - docker run -id -p 443:443 --name push-demo liuss/push:<version> /mnt/data/start.sh 需要将 version 改成对应的版本号
