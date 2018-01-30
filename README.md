@@ -2,9 +2,9 @@
 
 用ng5，material2写的推送服务控制台界面
 
-<video src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-1.mp4" autoplay="autoplay" width="800"></video>
+    <video src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-1.mp4" autoplay="autoplay" width="800"></video>
 
-<video src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-2.mp4" autoplay="autoplay" width="800"></video>
+    <video src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-2.mp4" autoplay="autoplay" width="800"></video>
 
 
 ### 快速体验
