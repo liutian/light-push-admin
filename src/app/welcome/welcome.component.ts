@@ -32,12 +32,19 @@ export class WelcomeComponent implements OnInit {
     this.apiService.login(this.username, this.password, this.isAdmin).then(() => {
       const dialogRef = this.dialog.open(DialogComponent, { data: { des: '登录成功' } });
       const userKey = (this.isAdmin ? '' : '/') + this.username;
-      this.user.save({
-        name: this.username,
+      const userInfo: any = {
         key: userKey,
+        name: this.username,
         password: this.password,
         role: this.isAdmin ? 'admin' : 'user'
-      });
+      }
+
+      if (!this.isAdmin) {
+        userInfo.namespace =  '/' + this.username;
+        userInfo.nsName = this.username;
+      }
+
+      this.user.save(userInfo);
       this.apiService.encodeAuth(userKey, this.password);
       setTimeout(() => {
         dialogRef.close();

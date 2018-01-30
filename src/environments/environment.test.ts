@@ -8,5 +8,6 @@ export const environment = {
   production: false,
   pushServer: '//ipush-test.visionet.cn',
   pushScirpt: '//ipush-test.visionet.cn/push',
-  pushOptionPath: '/push/socket.io/'
+  pushOptionPath: '/push/socket.io/',
+  copyRight: '上海xxx信息技术股份有限公司'
 };
