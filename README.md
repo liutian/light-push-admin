@@ -35,3 +35,9 @@ socket.on('connect', function () {
   });
 });
 ```
+
+### 注意事项
+独立部署时，需要将packae.json中第9行的域名，替换为你自己的域名，并注意是否有https，否则在build生成的js和css文件还是指向原有的域名，导致启动失败
+```
+ "build": "ng build -prod --vendor-chunk --sourcemaps --base-href /push-admin/ --deploy-url https://ipush.onesykes.com/push-admin",
+```
