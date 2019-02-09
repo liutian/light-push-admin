@@ -11,7 +11,3 @@ interface Window {
   ClipboardL: any;
   particlesJS: any;
 }
-
-interface String {
-  padStart: any;
-}
