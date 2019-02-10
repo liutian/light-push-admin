@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { RequestMethod } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Base64 } from 'js-base64';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 import { DialogComponent } from './dialog.component';
 
 @Injectable()
 export class ApiService {
-  private authKey = 'push_auth';
   auth: string;
+  private authKey = 'push_auth';
   private showErrorDialog: boolean;
 
   constructor(private http: HttpClient, private dialog: MatDialog, private router: Router) {
@@ -63,7 +62,7 @@ export class ApiService {
   }
 
   push(data) {
-    return this.authHttp('/api/auth/push', RequestMethod.Post, data);
+    return this.authHttp('/api/auth/push', 'Post', data);
   }
 
   pushReport(id, params?) {
@@ -79,15 +78,15 @@ export class ApiService {
   }
 
   saveNamespace(data) {
-    return this.authHttp('/api/admin/namespace/save', RequestMethod.Post, data);
+    return this.authHttp('/api/admin/namespace/save', 'Post', data);
   }
 
   clearRealTimeData(data) {
-    return this.authHttp('/api/admin/namespace/clear-realtime-data', RequestMethod.Post, data);
+    return this.authHttp('/api/admin/namespace/clear-realtime-data', 'Post', data);
   }
 
   clearLegacyClient(data) {
-    return this.authHttp('/api/admin/clear-legacy-client', RequestMethod.Post, data);
+    return this.authHttp('/api/admin/clear-legacy-client', 'Post', data);
   }
 
   clearNamespace(key) {
@@ -102,7 +101,7 @@ export class ApiService {
     return this.authHttp('/api/auth/namespace/current-message-stat');
   }
 
-  private authHttp(url: string, method?: RequestMethod, data?: any): Promise<any> {
+  private authHttp(url: string, method?: string, data?: any): Promise<any> {
     if (!this.auth) {
       if (!this.showErrorDialog) {
         const dialogRef = this.dialog.open(DialogComponent, { data: { des: '认证参数丢失' } });
@@ -123,7 +122,7 @@ export class ApiService {
       Authorization: this.auth
     });
 
-    if (method === RequestMethod.Post) {
+    if (method === 'Post') {
       return this.http.post(url, data, { headers }).toPromise();
     } else {
       return this.http.get(url, { headers }).toPromise();

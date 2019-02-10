@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { ApiService } from 'app/util/api.service';
@@ -80,7 +80,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
       }
 
       if (!result || !result.trim()) {
-        this.snackBar.open('请填写房间名', null , { duration: 3000 });
+        this.snackBar.open('请填写房间名', null, { duration: 3000 });
       } else {
         this.addRoom(result.trim());
       }
@@ -95,7 +95,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
         name: roomName,
         chartLineOption: ChartOption.createRoomLineOption(),
         chartPieOption: ChartOption.createRoomPieOption()
-      }
+      };
 
       this.fillRoomLineOption(room.chartLineOption);
       this.roomList.push(room);
@@ -114,7 +114,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
       this.chartOption = this.chartOptionOverview;
       this.activeTab = '';
     } else {
-      const room = this.roomList[index] || this.roomList[index - 1]
+      const room = this.roomList[index] || this.roomList[index - 1];
       this.chartOption = room.chartLineOption;
       this.activeTab = room.name;
     }
@@ -160,7 +160,7 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
       this.fetchTimeout = window.setTimeout(() => {
         this.fetchData();
       }, 5000);
-    })
+    });
   }
 
   fetchRoomOnlineData() {
@@ -249,6 +249,12 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnDestroy() {
+    if (this.fetchTimeout) {
+      window.clearTimeout(this.fetchTimeout);
+    }
+  }
+
   private toTime(time) {
     return [this.padStart(time.getHours()),
     this.padStart(time.getMinutes()),
@@ -259,9 +265,5 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
     return (str + '').padStart(2, '0');
   }
 
-  ngOnDestroy() {
-    if (this.fetchTimeout) {
-      window.clearTimeout(this.fetchTimeout)
-    }
-  }
+
 }

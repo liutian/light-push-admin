@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 const scriptPath = 'assets/lib/echart/';
 
@@ -35,7 +35,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
         this.chart.hideLoading();
         this.chart.setOption(data.option, { notMerge: data.clear });
-      })
+      });
     } else {
       throw new Error('optionObservable cannot be null');
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { ApiService } from 'app/util/api.service';
 import { SocketService } from 'app/util/socket.service';
@@ -50,8 +50,8 @@ export class OverviewEmitterComponent implements OnInit {
     }
     try {
       data.pushData = JSON.parse(this.messageForm.pushData);
-    }catch (e) {
-      this.snackBar.open('必须是JSON字符串', null , { duration: 3000 });
+    } catch (e) {
+      this.snackBar.open('必须是JSON字符串', null, { duration: 3000 });
       return;
     }
     this.apiService.push(data).then(res => {

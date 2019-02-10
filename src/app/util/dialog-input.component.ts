@@ -5,9 +5,9 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   template: `
     <h2 mat-dialog-title *ngIf="des">{{des}}</h2>
     <mat-dialog-content>
-      <mat-input-container>
+      <mat-form-field>
         <input matInput placeholder="输入房间名" #roomRef>
-      </mat-input-container>
+      </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button [mat-dialog-close]="-1" mat-raised-button>取消</button>&nbsp;&nbsp;
@@ -16,5 +16,5 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   `
 })
 export class DialogInputComponent {
-  constructor( @Inject(MAT_DIALOG_DATA) public des: String) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public des: String) { }
 }

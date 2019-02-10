@@ -1,19 +1,21 @@
 <form class="ns-form">
-  <mat-input-container>
-    <input matInput type="text" placeholder="命名空间" (ngModelChange)="searchSubject.next({key: $event})" name="key" [(ngModel)]="formData.key">
-  </mat-input-container>
+  <mat-form-field>
+    <input matInput type="text" placeholder="命名空间" (ngModelChange)="searchSubject.next({key: $event})" name="key"
+      [(ngModel)]="formData.key">
+  </mat-form-field>
 
-  <mat-input-container>
-    <input matInput type="text" placeholder="名称" (ngModelChange)="searchSubject.next({name: $event})" name="name" [(ngModel)]="formData.name">
-  </mat-input-container>
+  <mat-form-field>
+    <input matInput type="text" placeholder="名称" (ngModelChange)="searchSubject.next({name: $event})" name="name"
+      [(ngModel)]="formData.name">
+  </mat-form-field>
 
-  <mat-input-container>
+  <mat-form-field>
     <mat-select placeholder="服务状态" name="offline" [(ngModel)]="formData.offline" (change)="searchSubject.next({})">
       <mat-option *ngFor="let state of stateList" [value]="state.value">{{state.title}}</mat-option>
     </mat-select>
-  </mat-input-container>
-  <a mat-raised-button color="accent" (click)="searchSubject.next({})">搜索</a>
+  </mat-form-field>
 
+  <a mat-raised-button color="accent" (click)="searchSubject.next({})">搜索</a>
 
   <a mat-raised-button class="pull-right" color="accent" (click)="addNs()">新增命名空间</a>
 </form>
@@ -40,10 +42,11 @@
       <td style="width: 280px;">{{item.key}}</td>
       <td style="width: 280px;">{{item.name}}</td>
       <td class="center">{{item.totalClientCount}}</td>
-      <td class="center" matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}" matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
+      <td class="center" matTooltip="{{'终端数:' + item.clientCount + ' 用户数:' + item.userCount + ' 房间数:' + item.roomCount}}"
+        matTooltipPosition="above">{{item.clientCount}} - {{item.userCount}} - {{item.roomCount}}</td>
       <td class="center">{{item.offline === 'on' ? '离线' : '上线'}}</td>
-      <td >{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-      <td >
+      <td>{{item.update_date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>
         <button mat-button color="accent" (click)="dashboard(item)" *ngIf="item.key !== '/'">
           进入
         </button>
@@ -65,5 +68,5 @@
   暂无数据
 </div>
 
-<mat-paginator [length]="nsTotal" (page)="searchSubject.next({page: $event.pageIndex + 1,pageSize: $event.pageSize})" [pageIndex]="formData.page - 1"
-  [pageSize]="formData.pageSize" [pageSizeOptions]="[5,10,20,30,100]"></mat-paginator>
+<mat-paginator [length]="nsTotal" (page)="searchSubject.next({page: $event.pageIndex + 1,pageSize: $event.pageSize})"
+  [pageIndex]="formData.page - 1" [pageSize]="formData.pageSize" [pageSizeOptions]="[5,10,20,30,100]"></mat-paginator>

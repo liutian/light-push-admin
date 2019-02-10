@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from "rxjs/Subject";
+import { Subject } from 'rxjs';
 
 
 @Injectable()
@@ -41,12 +41,13 @@ export class SocketService {
   disconnect() {
     this.ready = false;
     if (!this.socket) {
-      return
+      return;
     }
 
     try {
       this.socket.disconnect();
     } catch (e) {
+      // tslint:disable-next-line:no-console
       console.log('断开连接失败');
     } finally {
       this.socket = undefined;
@@ -78,11 +79,14 @@ export class SocketService {
   private initListener() {
     this.socket.on('connect', () => {
       this.ready = true;
+      // tslint:disable-next-line:no-console
       console.log('连接成功');
     });
 
     this.socket.on('ok', (data) => {
+      // tslint:disable-next-line:no-console
       console.log('连接就绪:');
+      // tslint:disable-next-line:no-console
       console.dir(data);
     });
 
@@ -91,31 +95,39 @@ export class SocketService {
     });
 
     this.socket.on('connect_error', () => {
+      // tslint:disable-next-line:no-console
       console.log('连接异常，请检查你的网络');
       this.disconnect();
     });
 
     this.socket.on('connect_timeout', () => {
+      // tslint:disable-next-line:no-console
       console.log('连接超时，请重试');
       this.disconnect();
     });
 
     this.socket.on('reconnect_failed', () => {
+      // tslint:disable-next-line:no-console
       console.log('重新连接失败');
       this.disconnect();
     });
 
     this.socket.on('reconnect', () => {
+      // tslint:disable-next-line:no-console
       console.log('重新连接成功');
     });
 
     this.socket.on('peopleJoin', (data) => {
+      // tslint:disable-next-line:no-console
       console.log('上线广播：');
+      // tslint:disable-next-line:no-console
       console.dir(data);
     });
 
     this.socket.on('peopleLeave', (data) => {
+      // tslint:disable-next-line:no-console
       console.log('下线广播：');
+      // tslint:disable-next-line:no-console
       console.dir(data);
     });
   }

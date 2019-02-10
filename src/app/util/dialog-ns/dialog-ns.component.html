@@ -7,56 +7,58 @@
     </a>
   </h2>
   <mat-dialog-content>
-    <mat-input-container>
-      <input matInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required [readonly]="!isNew" [disabled]="!isNew">
+    <mat-form-field>
+      <input matInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required [readonly]="!isNew"
+        [disabled]="!isNew">
       <mat-error>必填</mat-error>
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container>
+    <mat-form-field>
       <input matInput type="text" placeholder="名称" [(ngModel)]="namespace.name" name="ns-name" required>
       <mat-error>必填</mat-error>
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container>
-      <input matInput type="password" placeholder="密码" [(ngModel)]="namespace.auth_passwd" name="ns-auth_passwd" required>
+    <mat-form-field>
+      <input matInput type="password" placeholder="密码" [(ngModel)]="namespace.auth_passwd" name="ns-auth_passwd"
+        required>
       <mat-error>必填</mat-error>
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container>
+    <mat-form-field>
       <input matInput type="text" placeholder="下线回调接口" [(ngModel)]="namespace.disconnect_callback" name="ns-disconnect_callback">
-    </mat-input-container>
+    </mat-form-field>
 
-    <mat-input-container>
+    <mat-form-field>
       <input matInput type="text" placeholder="上线回调接口" [(ngModel)]="namespace.connect_callback" name="ns-connect_callback">
-    </mat-input-container>
+    </mat-form-field>
 
     <div class="apns-item" *ngFor="let apns of namespace.apns_list">
-      <mat-input-container>
+      <mat-form-field>
         <input matInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required [disabled]="!apns.isNew">
-        <button type="button" mat-button matSuffix *ngIf="!apns.isNew" (click)="toggleDel(apns)" class="apns-del-btn" [class.del]="apns.del"
-          color="warn">删除apns</button>
+        <button type="button" mat-button matSuffix *ngIf="!apns.isNew" (click)="toggleDel(apns)" class="apns-del-btn"
+          [class.del]="apns.del" color="warn">删除apns</button>
         <mat-error>必填</mat-error>
-      </mat-input-container>
+      </mat-form-field>
 
       <mat-radio-group [value]="apns.apns_env" (change)="apns.apns_env = $event.value">
         <mat-radio-button [value]="'production'">生产环境证书</mat-radio-button>
         <mat-radio-button [value]="'dev'">测试环境证书</mat-radio-button>
       </mat-radio-group>
-      <mat-input-container>
+      <mat-form-field>
         <textarea matInput placeholder="测试证书cert" [(ngModel)]="apns.apns_dev_cert" name="apns-apns_dev_cert"></textarea>
-      </mat-input-container>
+      </mat-form-field>
 
-      <mat-input-container>
+      <mat-form-field>
         <textarea matInput placeholder="测试证书key" [(ngModel)]="apns.apns_dev_key" name="apns-apns_dev_key"></textarea>
-      </mat-input-container>
+      </mat-form-field>
 
-      <mat-input-container>
+      <mat-form-field>
         <textarea matInput placeholder="生产证书cert" [(ngModel)]="apns.apns_production_cert" name="apns-apns_production_cert"></textarea>
-      </mat-input-container>
+      </mat-form-field>
 
-      <mat-input-container>
+      <mat-form-field>
         <textarea matInput placeholder="生产证书key" [(ngModel)]="apns.apns_production_key" name="apns-apns_production_key"></textarea>
-      </mat-input-container>
+      </mat-form-field>
     </div>
 
   </mat-dialog-content>

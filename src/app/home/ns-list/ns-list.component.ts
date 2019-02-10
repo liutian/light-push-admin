@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs';
 
 import { ApiService } from 'app/util/api.service';
 import { UserService } from 'app/util/user.service';
@@ -29,7 +29,7 @@ export class NsListComponent implements OnInit, OnDestroy {
     offline: '',
     page: 1,
     pageSize: 20
-  }
+  };
   nsTotal = 0;
   allNsOnline: any = {};
   timeoutSearchAllOnline;
@@ -45,7 +45,7 @@ export class NsListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.apiService.encodeAuth(this.user.key, this.user.password);
-    this.searchSubject.debounceTime(1000).subscribe(params => {
+    this.searchSubject.subscribe(params => {
       this.searchNs(params);
     });
     this.searchAllOnline();
@@ -127,7 +127,7 @@ export class NsListComponent implements OnInit, OnDestroy {
         return;
       }
       this.apiService.clearNamespace(namespace.key).then(v => {
-        this.snackBar.open('操作成功', null , { duration: 3000 });
+        this.snackBar.open('操作成功', null, { duration: 3000 });
       });
     });
   }
@@ -156,23 +156,23 @@ export class NsListComponent implements OnInit, OnDestroy {
       offline: namespace.offline === 'off' ? 'on' : 'off'
     }).then(r => {
       namespace.offline = namespace.offline === 'off' ? 'on' : 'off';
-    })
+    });
   }
 
   clearRealTimeData(namespace) {
     this.apiService.clearRealTimeData({
       namespace: namespace.key
     }).then(r => {
-      this.snackBar.open('操作成功', null , { duration: 3000 });
-    })
+      this.snackBar.open('操作成功', null, { duration: 3000 });
+    });
   }
 
   clearLegacyClient(namespace) {
     this.apiService.clearLegacyClient({
       namespace: namespace.key
     }).then(r => {
-      this.snackBar.open('操作成功', null , { duration: 3000 });
-    })
+      this.snackBar.open('操作成功', null, { duration: 3000 });
+    });
   }
 
   ngOnDestroy() {
