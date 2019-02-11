@@ -37,10 +37,10 @@ export class WelcomeComponent implements OnInit {
         name: this.username,
         password: this.password,
         role: this.isAdmin ? 'admin' : 'user'
-      }
+      };
 
       if (!this.isAdmin) {
-        userInfo.namespace =  '/' + this.username;
+        userInfo.namespace = '/' + this.username;
         userInfo.nsName = this.username;
       }
 
@@ -59,6 +59,6 @@ export class WelcomeComponent implements OnInit {
       setTimeout(() => {
         dialogRef.close();
       }, 1000);
-    })
+    });
   }
 }
