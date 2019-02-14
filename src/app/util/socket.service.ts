@@ -92,6 +92,7 @@ export class SocketService {
 
     this.socket.on('push', (data) => {
       this.subject.next(data);
+      this.socket.emit('ackPush', { id: data.id });
     });
 
     this.socket.on('connect_error', () => {
