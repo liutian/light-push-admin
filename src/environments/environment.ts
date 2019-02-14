@@ -4,10 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  apiPath: 'http://127.0.0.1:10003',
+  apiPath: 'http://127.0.0.1:10002',
   production: false,
-  pushServer: 'http://127.0.0.1:21315',
-  pushScirpt: 'http://127.0.0.1:21315',
+  pushServer: 'http://127.0.0.1:21314',
+  pushScirpt: 'http://127.0.0.1:21314',
   pushOptionPath: '/socket.io/',
   copyRight: '上海xxx信息技术股份有限公司'
 };

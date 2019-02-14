@@ -1,8 +1,8 @@
 export const environment = {
-  apiPath: '//ipush.onesykes.com/push-logic',
+  apiPath: 'http://127.0.0.1:10002',
   production: true,
-  pushServer: '//ipush.onesykes.com',
-  pushScirpt: '//ipush.onesykes.com/push',
-  pushOptionPath: '/push/socket.io/',
-  copyRight: '上海yyy信息技术股份有限公司'
+  pushServer: 'http://127.0.0.1:21314',
+  pushScirpt: 'http://127.0.0.1:21314',
+  pushOptionPath: '/socket.io/',
+  copyRight: '上海xxx信息技术股份有限公司'
 };
