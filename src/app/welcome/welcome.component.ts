@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'app/util/api.service';
 import { DialogComponent } from 'app/util/dialog.component';
 import { UserService } from 'app/util/user.service';
-import 'particles.js';
+
 import { option as particleOption } from 'app/util/particles';
 
 @Component({
@@ -25,7 +25,7 @@ export class WelcomeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    // window.particlesJS('particles', particleOption);
+    window.particlesJS('particles', particleOption);
   }
 
   login() {
