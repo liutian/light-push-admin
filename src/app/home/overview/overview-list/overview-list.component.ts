@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ApiService } from 'app/util/api.service';
 import { DialogComponent } from 'app/util/dialog.component';

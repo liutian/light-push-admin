@@ -3,7 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, Htt
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError, } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { environment } from 'environments/environment';
 import { DialogComponent } from 'app/util/dialog.component';

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject, Optional } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ApiService } from 'app/util/api.service';
 
@@ -10,7 +10,7 @@ import { ApiService } from 'app/util/api.service';
 })
 export class OnlineReportDetailComponent implements OnInit {
 
-  tableData = {};
+  tableData: any = {};
 
   constructor(
     @Optional() @Inject(MAT_DIALOG_DATA) public room: String,
