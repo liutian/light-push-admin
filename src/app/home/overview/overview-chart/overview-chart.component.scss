@@ -1,6 +1,6 @@
 @import 'var';
 
-:host /deep/ .chart > div{
+:host ::ng-deep .chart > div{
   position: absolute !important;
 }
 

@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UserService {
 
-  private itemKey = 'user_info';
+
   name: string;
   role: string;
   key: string;
   password: string;
   namespace: string;
   nsName: string;
+  private itemKey = 'user_info';
 
   constructor() {
     const str = window.localStorage.getItem(this.itemKey);
@@ -30,25 +31,25 @@ export class UserService {
 
   save(data) {
     if (data.name !== undefined) {
-      this.name = data.name
+      this.name = data.name;
     }
     if (data.key !== undefined) {
-      this.key = data.key
+      this.key = data.key;
     }
     if (data.password !== undefined) {
-      this.password = data.password
+      this.password = data.password;
     }
     if (data.role !== undefined) {
-      this.role = data.role
+      this.role = data.role;
     }
     if (data.namespace !== undefined) {
-      this.namespace = data.namespace
+      this.namespace = data.namespace;
     }
     if (data.nsName !== undefined) {
-      this.nsName = data.nsName
+      this.nsName = data.nsName;
     }
     if (data.name !== undefined) {
-      this.name = data.name
+      this.name = data.name;
     }
     window.localStorage.setItem(this.itemKey, JSON.stringify(this));
   }

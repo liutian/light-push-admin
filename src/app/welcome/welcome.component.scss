@@ -1,32 +1,33 @@
 @import 'var';
 
 
-:host > [fxLayout] {
+:host>[fxLayout] {
   height: 100%;
   background-position: center;
   background-size: cover;
   color: #fff;
 }
 
-.login{
+.login {
   margin-top: 20px;
   padding: 40px;
   width: 400px;
-  background-color: rgba(161,175,175,0.42);
+  background-color: rgba(161, 175, 175, 0.42);
   z-index: 1;
 
   $padding-left: 40px;
 
-  .username,.password{
+  .username,
+  .password {
     width: calc(100% - #{$padding-left});
     left: $padding-left;
 
-    mat-icon{
+    mat-icon {
       margin-left: -$padding-left;
     }
   }
 
-  .form-action{
+  .form-action {
     margin-left: $padding-left;
   }
 }
@@ -39,6 +40,6 @@
   height: calc(100% - 1em);
 }
 
-:host /deep/ .mat-checkbox-frame{
+:host ::ng-deep .mat-checkbox-frame {
   border-color: #ddd;
 }

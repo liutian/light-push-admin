@@ -1,13 +1,14 @@
 import { ApplicationRef, NgModuleRef } from '@angular/core';
 
 export function acceptHot(_appModule, moduleRef) {
-  if (!_appModule.hot) return;
+  if (!_appModule.hot) { return; }
 
-  let applicationRef = moduleRef.injector.get(ApplicationRef);
+  const applicationRef = moduleRef.injector.get(ApplicationRef);
   _appModule.hot.accept();
 
   if (_appModule.hot.data) {
-    let store = _appModule.hot.data;
+    const store = _appModule.hot.data;
+    // tslint:disable-next-line:no-console
     console.log('HMR store', JSON.stringify(store, null, 2));
     if (store.restoreInputValues) {
       setTimeout(store.restoreInputValues);
@@ -66,7 +67,7 @@ function createNewHosts(cmps: any) {
       cmp.newNode = null;
       cmp.currentDisplay = null;
     });
-  }
+  };
 }
 
 
@@ -100,5 +101,5 @@ function createInputTransfer() {
   const $inputs = getInputValues();
   return function restoreInputValues() {
     setInputValues($inputs);
-  }
+  };
 }

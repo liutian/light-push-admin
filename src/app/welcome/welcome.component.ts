@@ -25,7 +25,7 @@ export class WelcomeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    window.particlesJS('particles', particleOption);
+    // window.particlesJS('particles', particleOption);
   }
 
   login() {

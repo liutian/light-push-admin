@@ -33,7 +33,7 @@ import { OnlineReportDetailComponent } from './util/online-report-detail/online-
 import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 
 import { environment } from '../environments/environment';
-import { UpdateAvailableEvent } from '@angular/service-worker/src/low_level';
+import { UpdateAvailableEvent } from '@angular/service-worker';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
