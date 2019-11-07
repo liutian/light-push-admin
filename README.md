@@ -1,6 +1,6 @@
 # LightPushAdmin
 
-基于Angular7和material7推送服务控制台界面
+基于Angular8和material8推送服务控制台界面
 
 <img src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-1.gif" />
 
