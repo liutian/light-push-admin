@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'app/util/api.service';
-import { DialogComponent } from 'app/util/dialog.component';
+
 
 @Component({
   selector: 'p-dialog-ns',
@@ -18,6 +18,7 @@ export class DialogNsComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private snackBar: MatSnackBar,
     private apiService: ApiService,
     private dialog: MatDialog) {
     this.closeDialog = data.close;
@@ -46,11 +47,22 @@ export class DialogNsComponent implements OnInit {
   saveNamespace() {
     const data = Object.assign({}, this.namespace);
     if (this.isNew) {
+      if (this.namespace.key && !/[A-Za-z0-9]/.test(this.namespace.key)) {
+        this.snackBar.open('必须是字母或数字', null, { duration: 3000 });
+        return;
+      }
       data.key = '/' + data.key.trim().replace(/^\/*/, '');
     }
     this.apiService.saveNamespace(data).then(v => {
       this.closeDialog(true);
-    })
+    });
+  }
+
+  nsKeyChange(text) {
+    if (text && !/[A-Za-z0-9]/.test(text)) {
+      this.snackBar.open('必须是字母或数字', null, { duration: 3000 });
+      this.namespace.key = '';
+    }
   }
 
 }

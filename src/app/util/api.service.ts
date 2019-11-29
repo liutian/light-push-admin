@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { DialogComponent } from './dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ApiService {
@@ -13,7 +14,12 @@ export class ApiService {
   private authKey = 'push_auth';
   private showErrorDialog: boolean;
 
-  constructor(private http: HttpClient, private dialog: MatDialog, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {
     this.auth = window.localStorage.getItem(this.authKey);
   }
 
@@ -27,20 +33,22 @@ export class ApiService {
     this.auth = auth;
   }
 
-  login(username, password, isAdmin?) {
-    const url = '/api/' + (isAdmin ? 'admin' : 'auth') + '/login';
-    const auth = Base64.encode((isAdmin ? '' : '/') + username + ':' + password);
+  login(params): Promise<any> {
+    const url = '/api/' + (params.isAdmin ? 'admin' : 'auth') + '/login';
+    const auth = Base64.encode((params.isAdmin ? '' : '/') + params.username + ':' + params.password);
     const headers = new HttpHeaders({
       Authorization: auth
     });
-    return this.http.post(url, null, { headers }).toPromise().then((res) => {
-      this.setAuth(auth);
-    }).catch(function (e) {
-      if (e.status === 404) {
-        return Promise.resolve({});
-      }
-      return Promise.reject({});
+    const clientPromise = this.http.post(url, null, { headers }).toPromise();
+    const _promise = this.wrapClientPromise(clientPromise, {
+      setAuth: true,
+      auth: auth,
+      _noEmitOnError: params._noEmitOnError
     });
+
+    this.wrapCatch(_promise);
+
+    return _promise;
   }
 
   onlineReport(params?) {
@@ -65,10 +73,10 @@ export class ApiService {
     return this.authHttp('/api/auth/push', 'Post', data);
   }
 
-  pushReport(id, params?) {
+  pushReport(id, params?, data?) {
     const query = params ? '?' + params : '';
 
-    return this.authHttp('/api/auth/report/push/' + id + query);
+    return this.authHttp('/api/auth/report/push/' + id + query, 'Get', data);
   }
 
   reportList(params?) {
@@ -122,12 +130,68 @@ export class ApiService {
       Authorization: this.auth
     });
 
+    let clientPromise;
     if (method === 'Post') {
-      return this.http.post(url, data, { headers }).toPromise();
+      clientPromise = this.http.post(url, data, { headers }).toPromise();
     } else {
-      return this.http.get(url, { headers }).toPromise();
+      clientPromise = this.http.get(url, { headers }).toPromise();
     }
+
+    const _promise = this.wrapClientPromise(clientPromise, data);
+
+    this.wrapCatch(_promise);
+
+    return _promise;
   }
 
+  private wrapClientPromise(clientPromise, params) {
+    params = params || {
+      _noEmitOnError: false
+    };
+    const _promise = clientPromise.then((res) => {
+      if (params.setAuth) {
+        this.setAuth(params.auth);
+      }
+      // if (res.error) {
+      //   let notice = '';
+      //   if (res.error.code === 9999) {
+      //     notice = res.error.msg;
+      //   }
+      //   res._notice = notice;
+      //   return Promise.reject(res);
+      // }
+      return res;
+    }).catch(e => {
+      // 根据_noEmitOnError判断是否需要自动弹出提示异常信息
+      if (params._noEmitOnError !== true && e._notice) {
+        this.snackBar.open(e._notice);
+      }
+      return Promise.reject(e);
+    });
+
+    return _promise;
+  }
+
+  private wrapCatch(_promise) {
+    const _then = _promise.then;
+    let _reject, __p;
+    const _rejectFn = (e) => {
+      if (_reject) {
+        _reject.call(__p, e);
+      }
+      // 屏蔽http响应异常,状态码为0,且发请求的Promise没有catch错误
+    };
+    _promise.then = (resolve, reject) => {
+      __p = _promise;
+      _reject = reject;
+      const _p = _then.call(_promise, resolve, _rejectFn);
+      _p.catch = (r) => {
+        __p = _p;
+        _reject = r;
+        return _p;
+      };
+      return _p;
+    };
+  }
 
 }

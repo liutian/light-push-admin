@@ -41,7 +41,7 @@ export class ChartOption {
         showSymbol: false,
         data: []
       }]
-    }
+    };
   }
 
   static createRoomLineOption() {
@@ -81,7 +81,7 @@ export class ChartOption {
         showSymbol: false,
         data: []
       }]
-    }
+    };
   }
 
   static createRoomPieOption() {
@@ -142,6 +142,6 @@ export class ChartOption {
           ]
         }
       ]
-    }
+    };
   }
 }

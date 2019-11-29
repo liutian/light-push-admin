@@ -1,4 +1,4 @@
-import { ApplicationRef, NgModuleRef } from '@angular/core';
+import { ApplicationRef } from '@angular/core';
 
 export function acceptHot(_appModule, moduleRef) {
   if (!_appModule.hot) { return; }

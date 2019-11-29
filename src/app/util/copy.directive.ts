@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, OnDestroy, Input } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 
 const scriptPath = 'assets/lib/clipboard/';
 

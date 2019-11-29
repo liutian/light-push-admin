@@ -1,7 +1,8 @@
 <nav mat-tab-nav-bar>
   <a mat-tab-link (click)="toggleChartView('')" [active]="!activeTab">总览</a>
 
-  <a mat-tab-link *ngFor="let room of roomList" (click)="toggleChartView(room.name)" matTooltip="{{room.name}}" [active]="activeTab === room.name">{{room.name | slice:-6}}</a>
+  <a mat-tab-link *ngFor="let room of roomList" (click)="toggleChartView(room.name)" matTooltip="{{room.name}}"
+    [active]="activeTab === room.name">{{room.name | slice:-6}}</a>
 
   <a mat-tab-link (click)="showAddRoom()">
     +新增
@@ -16,8 +17,10 @@
 </div>
 
 <div class="action-btn-group" *ngIf="activeTab">
-  <button type="button" mat-raised-button (click)="toggleChartType('pie')" [disabled]="currChartType == 'pie'">客户端占比</button>
-  <button type="button" mat-raised-button (click)="toggleChartType('line')" [disabled]="currChartType == 'line'">实时数据</button>
-  <button type="button" mat-raised-button (click)="showDetail(activeTab)">详细信息</button>
-  <button type="button" mat-raised-button (click)="removeRoom(activeTab)">关闭</button>
+  <mat-button-toggle-group appearance="standard">
+    <mat-button-toggle (click)="toggleChartType('pie')" [disabled]="currChartType == 'pie'">客户端占比</mat-button-toggle>
+    <mat-button-toggle (click)="toggleChartType('line')" [disabled]="currChartType == 'line'">实时数据</mat-button-toggle>
+    <mat-button-toggle (click)="showDetail(activeTab)">详细信息</mat-button-toggle>
+    <mat-button-toggle (click)="removeRoom(activeTab)">关闭</mat-button-toggle>
+  </mat-button-toggle-group>
 </div>

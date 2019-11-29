@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from 'app/util/api.service';
+import { DialogComponent } from 'app/util/dialog.component';
+import { SocketService } from 'app/util/socket.service';
+import { UserService } from 'app/util/user.service';
+import { environment } from 'environments/environment';
 import { Subscription } from 'rxjs';
 
-import { ApiService } from 'app/util/api.service';
-import { SocketService } from 'app/util/socket.service';
-import { environment } from 'environments/environment';
-import { UserService } from 'app/util/user.service';
-import { DialogComponent } from 'app/util/dialog.component';
 
 @Component({
   selector: 'p-overview-emitter',
@@ -67,8 +67,10 @@ export class OverviewEmitterComponent implements OnInit {
   }
 
   report() {
-    this.apiService.pushReport(this.reportMessageId, 'detail=true').then(data => {
+    this.apiService.pushReport(this.reportMessageId, 'detail=true', { _noEmitOnError: true }).then(data => {
       this.reportMessage = JSON.stringify(data, null, '    ');
+    }).catch(e => {
+      this.snackBar.open(e.error.msg);
     });
   }
 
@@ -115,10 +117,11 @@ export class OverviewEmitterComponent implements OnInit {
     });
     this.socketService.joinRoom(this.simulateForm.joinRooms.split(','), (res) => {
       if (res.status !== 200) {
-        const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
-        setTimeout(() => {
-          dialogRef.close();
-        }, 1000);
+        this.snackBar.open('操作失败', null, { duration: 1000 });
+        // const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
+        // setTimeout(() => {
+        //   dialogRef.close();
+        // }, 1000);
       }
     });
   }
@@ -129,10 +132,11 @@ export class OverviewEmitterComponent implements OnInit {
     });
     this.socketService.leaveRoom(this.simulateForm.leaveRooms.split(','), (res) => {
       if (res.status !== 200) {
-        const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
-        setTimeout(() => {
-          dialogRef.close();
-        }, 1000);
+        this.snackBar.open('操作失败', null, { duration: 1000 });
+        // const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
+        // setTimeout(() => {
+        //   dialogRef.close();
+        // }, 1000);
       }
     });
   }
@@ -151,17 +155,19 @@ export class OverviewEmitterComponent implements OnInit {
 
       this.socketService.setInfo(JSON.parse(this.simulateForm.clientInfo), (res) => {
         if (res.status !== 200) {
-          const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
-          setTimeout(() => {
-            dialogRef.close();
-          }, 1000);
+          this.snackBar.open('操作失败', null, { duration: 1000 });
+          // const dialogRef = this.dialog.open(DialogComponent, { data: { des: '操作失败' } });
+          // setTimeout(() => {
+          //   dialogRef.close();
+          // }, 1000);
         }
       });
     } catch (e) {
-      const dialogRef = this.dialog.open(DialogComponent, { data: { des: '数据格式有误' } });
-      setTimeout(() => {
-        dialogRef.close();
-      }, 1000);
+      this.snackBar.open('数据格式有误', null, { duration: 1000 });
+      // const dialogRef = this.dialog.open(DialogComponent, { data: { des: '数据格式有误' } });
+      // setTimeout(() => {
+      //   dialogRef.close();
+      // }, 1000);
     }
 
 

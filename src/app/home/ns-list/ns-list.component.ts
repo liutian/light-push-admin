@@ -1,14 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject } from 'rxjs';
-
+import { Router } from '@angular/router';
 import { ApiService } from 'app/util/api.service';
-import { UserService } from 'app/util/user.service';
 import { DialogNsComponent } from 'app/util/dialog-ns/dialog-ns.component';
 import { DialogComponent } from 'app/util/dialog.component';
-
+import { UserService } from 'app/util/user.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'p-ns-list',

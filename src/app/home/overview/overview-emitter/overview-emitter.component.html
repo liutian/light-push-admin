@@ -26,10 +26,11 @@
     <input type="number" matInput [(ngModel)]="messageForm.expire" name="apnsName" placeholder="输入失效时间(单位小时)">
   </mat-form-field>
 
-  <div style="text-align: right;">
-    <mat-slide-toggle [checked]="messageForm.lost" color="accent" name="lost" [(ngModel)]="messageForm.lost">模拟数据丢失</mat-slide-toggle>
-    <mat-slide-toggle [checked]="messageForm.leaveMessage" [disabled]="messageForm.lost" color="accent" name="leaveMessage"
-      [(ngModel)]="messageForm.leaveMessage">离线保存</mat-slide-toggle>
+  <div>
+    <mat-slide-toggle [checked]="messageForm.lost" color="accent" name="lost" [(ngModel)]="messageForm.lost">模拟数据丢失
+    </mat-slide-toggle>
+    <mat-slide-toggle [checked]="messageForm.leaveMessage" [disabled]="messageForm.lost" color="accent"
+      name="leaveMessage" [(ngModel)]="messageForm.leaveMessage">离线保存</mat-slide-toggle>
     <button type="submit" [disabled]="sendMessageForm.form.invalid" mat-raised-button color="accent">发送</button>
   </div>
 
@@ -53,12 +54,12 @@
 </form>
 
 <div *ngIf="currTab == 'simulate'">
-  <form (ngSubmit)="connect()" #conectionForm="ngForm">
+  <form (ngSubmit)="connect()" autocomplete="off" #conectionForm="ngForm">
     <div [hidden]="socketService.ready">
 
       <mat-form-field>
-        <input type="text" matInput [(ngModel)]="simulateForm.userid" name="userid" color="warn" placeholder="输入客户端userid"
-          required>
+        <input type="text" matInput [(ngModel)]="simulateForm.userid" name="userid" color="warn"
+          placeholder="输入客户端userid" required>
         <mat-error>必填</mat-error>
       </mat-form-field>
 
@@ -69,11 +70,13 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input type="text" matInput [(ngModel)]="simulateForm.platform" name="platform" color="warn" placeholder="输入客户端所属平台">
+        <input type="text" matInput [(ngModel)]="simulateForm.platform" name="platform" color="warn"
+          placeholder="输入客户端所属平台">
       </mat-form-field>
 
       <div style="text-align: right;">
-        <mat-slide-toggle checked="simulateForm.activityBroadcast" color="accent" name="activityBroadcast" [(ngModel)]="simulateForm.activityBroadcast">上线/下线提醒</mat-slide-toggle>
+        <mat-slide-toggle checked="simulateForm.activityBroadcast" color="accent" name="activityBroadcast"
+          [(ngModel)]="simulateForm.activityBroadcast">上线/下线提醒</mat-slide-toggle>
 
         <button type="submit" [disabled]="conectionForm.form.invalid" *ngIf="!socketService.ready" mat-raised-button
           color="accent">上线</button>
@@ -96,15 +99,17 @@
       </div>
 
       <mat-form-field>
-        <input type="text" matInput [(ngModel)]="simulateForm.joinRooms" name="joinRooms" color="warn" placeholder="输入房间，已逗号分隔">
+        <input type="text" matInput [(ngModel)]="simulateForm.joinRooms" name="joinRooms" color="warn"
+          placeholder="输入房间，已逗号分隔">
         <button type="button" mat-raised-button (click)="joinRoom()" [disabled]="!simulateForm.joinRooms" color="accent"
           matSuffix>加入房间</button>
       </mat-form-field>
 
       <mat-form-field>
-        <input type="text" matInput [(ngModel)]="simulateForm.leaveRooms" name="leaveRooms" color="warn" placeholder="输入房间，已逗号分隔">
-        <button type="button" mat-raised-button (click)="leaveRoom()" [disabled]="!simulateForm.leaveRooms" color="accent"
-          matSuffix>离开房间</button>
+        <input type="text" matInput [(ngModel)]="simulateForm.leaveRooms" name="leaveRooms" color="warn"
+          placeholder="输入房间，已逗号分隔">
+        <button type="button" mat-raised-button (click)="leaveRoom()" [disabled]="!simulateForm.leaveRooms"
+          color="accent" matSuffix>离开房间</button>
       </mat-form-field>
 
       <div>
@@ -117,7 +122,8 @@
       </mat-form-field>
 
       <div class="pull-right">
-        <button type="button" mat-raised-button (click)="setClientInfo()" color="accent" matSuffix>设置信息</button>&nbsp;&nbsp;
+        <button type="button" mat-raised-button (click)="setClientInfo()" color="accent"
+          matSuffix>设置信息</button>&nbsp;&nbsp;
         <button type="button" mat-raised-button color="warn" (click)="disconnect()">下线</button>
       </div>
     </div>

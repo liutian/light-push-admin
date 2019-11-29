@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-
+import { Router } from '@angular/router';
 import { ApiService } from 'app/util/api.service';
 import { UserService } from 'app/util/user.service';
-import { DialogNsComponent } from 'app/util/dialog-ns/dialog-ns.component';
 import { environment } from 'environments/environment';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'p-home',

@@ -1,8 +1,9 @@
-<form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center" #loginForm="ngForm" style="background-image: url(assets/img/bg.jpg)">
+<form fxLayout="column" (ngSubmit)="login()" autocomplete="off" fxLayoutAlign="center center" #loginForm="ngForm"
+  style="background-image: url(assets/img/bg.jpg)">
   <div class="login">
     <mat-form-field class="username">
       <mat-icon matPrefix>person</mat-icon>
-      <input type="text" [(ngModel)]="username" matInput name="username" required>
+      <input type="text" [(ngModel)]="username" matInput name="username" (ngModelChange)="onChangeUser()" required>
       <mat-error>必填</mat-error>
     </mat-form-field>
 
@@ -13,8 +14,9 @@
     </mat-form-field>
 
     <div class="clearfix form-action">
-      <mat-checkbox class="pull-left" [(ngModel)]="isAdmin" [checked]="isAdmin" name="isAdmin">管理员</mat-checkbox>
-      <button type="submit" color="accent" class="pull-right" [disabled]="loginForm.form.invalid" mat-raised-button>登录</button>
+      <!-- <mat-checkbox class="pull-left" [(ngModel)]="isAdmin" [checked]="isAdmin" name="isAdmin">管理员</mat-checkbox> -->
+      <button type="submit" color="accent" class="pull-right" [disabled]="loginForm.form.invalid"
+        mat-raised-button>登录</button>
     </div>
   </div>
   <div id="particles"></div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 const scriptPath = 'assets/lib/echart/';

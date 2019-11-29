@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, Inject, Optional } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import { ApiService } from 'app/util/api.service';
+
 
 @Component({
   selector: 'p-online-report-detail',
   templateUrl: './online-report-detail.component.html',
-  styleUrls: ['./online-report-detail.component.css']
+  styleUrls: ['./online-report-detail.component.scss']
 })
 export class OnlineReportDetailComponent implements OnInit {
 

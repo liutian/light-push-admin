@@ -1,4 +1,4 @@
-<form (ngSubmit)="saveNamespace()" #nsForm="ngForm">
+<form (ngSubmit)="saveNamespace()" autocomplete="off" #nsForm="ngForm">
 
   <h2 mat-dialog-title>
     {{isNew ? '新增命名空间' : '编辑命名空间'}}
@@ -8,9 +8,10 @@
   </h2>
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required [readonly]="!isNew"
-        [disabled]="!isNew">
+      <input matInput type="text" placeholder="命名空间" [(ngModel)]="namespace.key" name="ns-key" required
+        [readonly]="!isNew" [disabled]="!isNew" (blur)="nsKeyChange(namespace.key)">
       <mat-error>必填</mat-error>
+      <mat-hint>必须是字母或数字</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
@@ -25,16 +26,19 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="text" placeholder="下线回调接口" [(ngModel)]="namespace.disconnect_callback" name="ns-disconnect_callback">
+      <input matInput type="text" placeholder="下线回调接口" [(ngModel)]="namespace.disconnect_callback"
+        name="ns-disconnect_callback">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="text" placeholder="上线回调接口" [(ngModel)]="namespace.connect_callback" name="ns-connect_callback">
+      <input matInput type="text" placeholder="上线回调接口" [(ngModel)]="namespace.connect_callback"
+        name="ns-connect_callback">
     </mat-form-field>
 
     <div class="apns-item" *ngFor="let apns of namespace.apns_list">
       <mat-form-field>
-        <input matInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required [disabled]="!apns.isNew">
+        <input matInput type="text" placeholder="apns名称" [(ngModel)]="apns.name" name="apns-name" required
+          [disabled]="!apns.isNew">
         <button type="button" mat-button matSuffix *ngIf="!apns.isNew" (click)="toggleDel(apns)" class="apns-del-btn"
           [class.del]="apns.del" color="warn">删除apns</button>
         <mat-error>必填</mat-error>
@@ -53,17 +57,20 @@
       </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput placeholder="生产证书cert" [(ngModel)]="apns.apns_production_cert" name="apns-apns_production_cert"></textarea>
+        <textarea matInput placeholder="生产证书cert" [(ngModel)]="apns.apns_production_cert"
+          name="apns-apns_production_cert"></textarea>
       </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput placeholder="生产证书key" [(ngModel)]="apns.apns_production_key" name="apns-apns_production_key"></textarea>
+        <textarea matInput placeholder="生产证书key" [(ngModel)]="apns.apns_production_key"
+          name="apns-apns_production_key"></textarea>
       </mat-form-field>
     </div>
 
   </mat-dialog-content>
   <div class="clearfix action">
-    <button type="submit" class="pull-right" mat-raised-button color="accent" [disabled]="nsForm.form.invalid">保存</button>
+    <button type="submit" class="pull-right" mat-raised-button color="accent"
+      [disabled]="nsForm.form.invalid">保存</button>
     <button type="button" class="pull-right" (click)="addApns()" mat-raised-button color="accent">新增apns证书</button>
     <button type="button" class="pull-right" mat-dialog-close mat-raised-button>取消</button>
   </div>

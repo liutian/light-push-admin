@@ -1,12 +1,14 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 import { ApiService } from 'app/util/api.service';
-import { ChartOption } from './chart-option';
 import { DialogInputComponent } from 'app/util/dialog-input.component';
 import { OnlineReportDetailComponent } from 'app/util/online-report-detail/online-report-detail.component';
+import { UserService } from 'app/util/user.service';
+import { Observable } from 'rxjs';
+import { ChartOption } from './chart-option';
+
 
 @Component({
   selector: 'p-overview-chart',
@@ -25,6 +27,8 @@ export class OverviewChartComponent implements OnInit, OnDestroy {
   private fetchTimeout: number;
 
   constructor(
+    private router: Router,
+    private user: UserService,
     private apiService: ApiService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) {

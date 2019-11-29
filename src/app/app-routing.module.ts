@@ -1,29 +1,35 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
-import { WelcomeComponent } from './welcome/welcome.component';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { OverviewComponent } from './home/overview/overview.component';
 import { NsListComponent } from './home/ns-list/ns-list.component';
+import { OverviewComponent } from './home/overview/overview.component';
+import { AuthHomeNsListGuard } from './util/auth-home-ns-list.guard';
+import { AuthHomeGuard } from './util/auth-home.guard';
+import { WelcomeComponent } from './welcome/welcome.component';
+
 
 const routes: Routes = [
   {
     path: '',
     component: WelcomeComponent
-  }, {
+  },
+  {
     path: 'welcome',
     component: WelcomeComponent
-  }, {
+  },
+  {
     path: 'home',
     component: HomeComponent,
     children: [
       {
         path: '',
-        component: OverviewComponent
-      }, {
+        component: OverviewComponent,
+        canActivate: [AuthHomeGuard],
+      },
+      {
         path: 'ns-list',
-        component: NsListComponent
+        component: NsListComponent,
+        canActivate: [AuthHomeNsListGuard],
       }
     ]
   },

@@ -1,10 +1,10 @@
 @import 'var';
 
-:host ::ng-deep .chart > div{
+:host ::ng-deep .chart>div {
   position: absolute !important;
 }
 
-.action-btn-group{
+.action-btn-group {
   position: absolute;
   left: 0;
   width: 100%;
@@ -13,3 +13,7 @@
 }
 
 
+:host ::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 36px;
+  padding: 0 16px;
+}

@@ -1,9 +1,28 @@
+@import 'var';
 
-a{
+a {
   text-decoration: underline;
   color: #00f;
 }
 
-table{
-  margin-top: 15px;
+.overview-form {
+  padding-bottom: $padding;
+
+  mat-form-field,
+  button {
+    margin-right: 10px;
+  }
+}
+
+:host ::ng-deep mat-paginator {
+  border-top: solid 1px #ddd;
+}
+
+.width-30rem {
+  width: 30rem;
+  max-width: 100%;
+}
+
+.p-r-10 {
+  padding-right: 10px;
 }

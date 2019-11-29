@@ -1,15 +1,17 @@
 @import 'var';
 
-.ns-form{
+.ns-form {
   padding-bottom: $padding;
+
+  mat-form-field {
+    margin-right: 10px;
+  }
 }
 
-mat-form-field{
-  margin-right: 10px;
-}
+.table {
 
-.table{
-  th.center,td.center{
+  th.center,
+  td.center {
     text-align: center;
   }
 }
