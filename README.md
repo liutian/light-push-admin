@@ -5,9 +5,8 @@
 <img src="https://raw.githubusercontent.com/liutian/light-push-admin/master/doc/manual-1.gif" />
 
 ### 快速体验
-- docker run -id -p 443:443 --name push-demo liuss/push:<version> /mnt/data/start.sh 需要将 version 改成对应的版本号
-- 访问管理页面: https://127.0.0.1 登录名 demo 密码 123456 勾选管理员选项
-- [在线体验](https://39.104.57.212:55555/)
+- `sudo docker run -id -p 443:443 -p 80:80 --name light-push-demo liuss/light-push:1.2.0 /mnt/data/start.sh` 
+- 访问管理页面: `https://127.0.0.1/push-admin` 登录名 admin 密码 123456 
 
 ### 调用方式
 ```
